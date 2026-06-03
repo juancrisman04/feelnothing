@@ -3605,7 +3605,7 @@ body.cart-open {
 }
 
 .novedades-section {
-  padding-top: 2.50rem;
+  padding-top: 4.5rem;
   padding-bottom: 3.2rem;
 }
 
@@ -4535,11 +4535,11 @@ body.cart-open {
   }
 
   .novedades-section .featured-products-shell > .flex {
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.45rem !important;
   }
 
   .novedades-section {
-    padding-top: 1.15rem;
+    padding-top: 2.8rem;
   }
 
   .novedades-section .featured-products-shell {
