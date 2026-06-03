@@ -2280,7 +2280,7 @@ body.product-detail-body .site-header-action__icon {
   position: relative;
   width: 100%;
   overflow: hidden;
-  min-height: 1.95rem;
+  min-height: 2.25rem;
 }
 
 .site-header__ticker::before,
@@ -2312,9 +2312,9 @@ body.product-detail-body .site-header-action__icon {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.52rem 0;
-  font-size: 0.66rem;
-  font-weight: 700;
+  padding: 0.62rem 0;
+  font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -3275,8 +3275,8 @@ body.cart-open {
   }
 
   .site-header-action__icon {
-    width: 1.46rem;
-    height: 1.46rem;
+    width: 1.32rem;
+    height: 1.32rem;
   }
 
   .site-header-action__icon * {
@@ -4530,7 +4530,7 @@ body.cart-open {
   }
 
   .novedades-section h2 {
-    font-size: 1.7rem !important;
+    font-size: 1.35rem !important;
     line-height: 1.05;
   }
 
@@ -4637,8 +4637,9 @@ section {
 .catalog-card p,
 .catalog-editorial-card__title,
 .catalog-editorial-card__price {
-  font-size: 0.84rem !important;
+  font-size: 0.92rem !important;
   line-height: 1.22;
+  font-weight: 500 !important;
 }
 
 .catalog-card p {
@@ -4650,8 +4651,9 @@ section {
   .catalog-card p,
   .catalog-editorial-card__title,
   .catalog-editorial-card__price {
-    font-size: 0.74rem !important;
+    font-size: 0.82rem !important;
     line-height: 1.18;
+    font-weight: 500 !important;
   }
 }
 
