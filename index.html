@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feelnothing</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ffeelnothi3263back.builtwithrocket.new&_be=https%3A%2F%2Fappanalytics.rocket.new&_v=0.1.14"></script>
+  <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2"></script>
+  </head>
+<body class="is-loading light-theme antialiased bg-black text-white selection:bg-red-600 selection:text-white">
+
+  <div class="brand-loader" aria-label="Cargando FEEL NOTHING" role="status">
+    <div class="brand-loader__mark">
+      <img src="img/logo.png" alt="FEEL NOTHING" class="brand-loader__logo">
+    </div>
+    <span class="brand-loader__line" aria-hidden="true"></span>
+  </div>
+
+  <!-- HEADER -->
+  <nav class="site-header fixed z-50 left-1/2 -translate-x-1/2">
+    <div class="site-header__ticker" aria-label="Novedades de la tienda">
+      <div class="site-header__ticker-marquee">
+        <div class="site-header__ticker-track">
+          <span>COLECCIÓN 2026 DISPONIBLE AHORA</span>
+          <span>STREETWEAR ARGENTINO</span>
+          <span>3 CUOTAS SIN INTERÉS EN SELECCIONADOS</span>
+        </div>
+        <div class="site-header__ticker-track" aria-hidden="true">
+          <span>COLECCIÓN 2026 DISPONIBLE AHORA</span>
+          <span>STREETWEAR ARGENTINO</span>
+          <span>3 CUOTAS SIN INTERÉS EN SELECCIONADOS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-header__shell">
+      <button type="button" class="site-header-burger" aria-label="Abrir menu" data-mobile-toggle aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="site-header__side site-header__side--left hidden md:flex">
+        <a href="index.html#products" class="nav-link">
+          <span class="nav-link__label">Tienda</span>
+          <span class="nav-link__indicator"></span>
+        </a>
+        <a href="index.html#story" class="nav-link">
+          <span class="nav-link__label">Colección</span>
+          <span class="nav-link__indicator"></span>
+        </a>
+        <a href="index.html#more-products" class="nav-link">
+          <span class="nav-link__label">Drop</span>
+          <span class="nav-link__indicator"></span>
+        </a>
+        <a href="index.html#contact" class="nav-link">
+          <span class="nav-link__label">Contacto</span>
+          <span class="nav-link__indicator"></span>
+        </a>
+      </div>
+
+      <a href="#inicio" class="site-header-brand" aria-label="Ir al inicio">
+        <img src="img/logo.png" alt="Feel Nothing" class="site-header-logo">
+      </a>
+
+      <div class="site-header__side site-header__side--right">
+        <a href="https://wa.me/5493413045521" target="_blank" rel="noopener noreferrer" class="site-header-action site-header-action--icon" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="site-header-action__icon">
+            <path d="M12 4.2a7.8 7.8 0 0 0-6.64 11.9L4.3 19.7l3.72-.98A7.8 7.8 0 1 0 12 4.2Z" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M9.18 8.92c.12-.28.3-.32.56-.33h.48c.16 0 .38.05.5.33l.7 1.72c.09.22.07.39-.02.54l-.31.51c-.09.14-.07.27.01.39.43.73 1.08 1.36 1.84 1.79.15.08.28.08.4-.01l.56-.38c.15-.1.34-.13.53-.04l1.63.73c.24.11.36.28.36.49v.43c0 .25-.11.44-.3.57-.46.3-1.14.48-1.78.41-1.28-.14-2.56-.76-3.62-1.82-1.06-1.06-1.68-2.34-1.81-3.61-.07-.63.11-1.31.39-1.73Z" fill="currentColor"></path>
+          </svg>
+        </a>
+        <button type="button" class="site-header-action site-header-action--primary site-header-action--cart" aria-label="Abrir carrito" data-cart-toggle aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="site-header-action__icon">
+            <path d="M6.8 8.2h10.4l.8 10.6H6L6.8 8.2Z" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"></path>
+            <path d="M9.3 8.2V7a2.7 2.7 0 0 1 5.4 0v1.2" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"></path>
+          </svg>
+          <span class="site-header-action__badge">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu-backdrop" data-mobile-backdrop></div>
+    <div id="mobile-menu" class="mobile-menu-panel" data-mobile-menu aria-hidden="true">
+      <div class="mobile-menu-panel__inner">
+        <a href="#story" class="mobile-menu-panel__link">FEEL NOTHING</a>
+
+        <details class="mobile-menu-panel__group">
+          <summary class="mobile-menu-panel__summary">Productos</summary>
+          <div class="mobile-menu-panel__subnav">
+            <a href="remeras.html">Remeras</a>
+            <a href="pantalones.html">Pantalones</a>
+            <a href="buzos.html">Buzos</a>
+          </div>
+        </details>
+
+        <a href="#contact" class="mobile-menu-panel__link">Políticas</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="inicio" class="relative min-h-screen overflow-hidden hero-bleed-top">
+    <!-- FOTO PORTADA -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="img/grafiti fn.png" 
+        alt="Urban street background with graffiti and concrete textures"
+        class="w-full h-full object-cover"/>
+      <!-- Grain texture overlay -->
+      <div class="grain-overlay absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
+    </div>
+  </section>
+
+  <!-- NOVEDADES -->
+  <section class="novedades-section relative">
+    <div class="featured-products-shell mx-auto px-6">
+      <div class="flex items-end justify-between gap-6 mb-4">
+        <div>
+          <h2 class="text-4xl md:text-4xl font-semibold tracking-tight">NOVEDADES</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="remera-street-culture-negra.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgremeras/remera over negra detras.png" alt="Foto de remera oversize negra" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgremeras/remera over negra detras.png" alt="Foto alternativa de remera oversize negra" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Remera oversize STREET CULTURE negra</h3>
+            <p class="mt-2 text-base font-bold text-black">$28.000,00</p>
+          </div>
+        </a>
+
+        <a href="bermuda-34-azul.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgpantalones/baggy corto azul detras.png" alt="Foto para bermuda 3/4 azul" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgpantalones/baggy corto azul delante.png" alt="Foto alternativa para bermuda 3/4 azul" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Bermuda 3/4 azul</h3>
+            <p class="mt-2 text-base font-bold text-black">$42.000,00</p>
+          </div>
+        </a>
+
+        <a href="remera-your-fn-beige.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgremeras/remera over beige detras.png" alt="Foto de remera oversize beige" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgremeras/remera over beige detras.png" alt="Foto alternativa de remera oversize beige" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Remera oversize YOUR FN beige</h3>
+            <p class="mt-2 text-base font-bold text-black">$28.000,00</p>
+          </div>
+        </a>
+
+        <a href="bermuda-34-negra.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgpantalones/baggy corto negro detras.png" alt="Foto para bermuda 3/4 negra" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgpantalones/baggy corto negro delante.png" alt="Foto alternativa para bermuda 3/4 negra" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Bermuda 3/4 negra</h3>
+            <p class="mt-2 text-base font-bold text-black">$42.000,00</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUESTRA HISTORIA -->
+  <section id="story" class="py-2  bg-zinc-950 relative">
+    <div class="featured-products-shell mx-auto px-6">
+      <div class="flex flex-col lg:flex-row gap-16 items-center lg:items-stretch">
+        
+        <div class="lg:w-1/2 lg:h-[600px] flex flex-col justify-between">
+
+          <div class="mt-auto p-5 bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm">
+            <p class="text-sm text-white/60 italic leading-relaxed">
+              "No creamos moda para una temporada, creamos piezas que te acompañen hasta el final. Ropa que usarás hasta que se deshaga y que, cuando ya no esté, realmente extrañes."
+            </p>
+            <p class="text-sm text-white/40 mt-2">- Founder, FEEL NOTHING</p>
+          </div>
+        </div>
+
+        <!-- FOTO HISTORIA -->
+        <div class="lg:w-1/2 h-[500px] lg:h-[600px] relative">
+          <img 
+            src="img/bolsas feelnothing.jpeg" 
+            alt="FEEL NOTHING founder wearing black hoodie in urban alleyway with graffiti"
+            class="w-full h-full object-cover shadow-2xl"
+            style="border-radius: 0.35rem;"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECCIÓN -->
+  <section class="novedades-section relative">
+    <div class="featured-products-shell mx-auto px-6">
+      <div class="flex items-end justify-between gap-6 mb-4">
+        <div>
+          <h2 class="text-4xl md:text-4xl font-semibold tracking-tight">SELECCIÓN FEEL NOTHING</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="pantalon-baggy-azul.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgpantalones/baggy largo azul detras.png" alt="Foto para pantalón baggy azul" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgpantalones/baggy largo azul delante.png" alt="Foto alternativa para pantalón baggy azul" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Pantalón baggy azul</h3>
+            <p class="mt-2 text-base font-bold text-black">$48.000,00</p>
+          </div>
+        </a>
+
+        <a href="bermuda-34-negra.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgpantalones/baggy corto negro detras.png" alt="Foto para bermuda 3/4 negra" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgpantalones/baggy corto negro delante.png" alt="Foto alternativa para bermuda 3/4 negra" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Bermuda 3/4 negra</h3>
+            <p class="mt-2 text-base font-bold text-black">$42.000,00</p>
+          </div>
+        </a>
+
+        <a href="bermuda-34-azul.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgpantalones/baggy corto azul detras.png" alt="Foto para bermuda 3/4 azul" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgpantalones/baggy corto azul detras.png" alt="Foto alternativa para bermuda 3/4 azul" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Bermuda 3/4 azul</h3>
+            <p class="mt-2 text-base font-bold text-black">$42.000,00</p>
+          </div>
+        </a>
+
+        <a href="remera-your-fn-blanca.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgremeras/remera over gris detras.png" alt="Foto de remera gris" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgremeras/remera over gris detras.png" alt="Foto alternativa de remera gris" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Remera gris YOUR FN</h3>
+            <p class="mt-2 text-base font-bold text-black">$28.000,00</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section id="products" class="products-section bg-black relative">
+    <div class="products-showcase-shell mx-auto px-6">
+        <div class="products-showcase-grid">
+        
+        <a href="remeras.html" class="group products-showcase-card">
+          <div class="products-showcase-card__media relative overflow-hidden">
+            <img 
+              src="img/remeras.png" 
+              alt="Remeras"
+              class="w-full h-full object-cover"/>
+          </div>
+          <div class="products-showcase-card__overlay">
+            <h3 class="products-showcase-card__title">Remeras</h3>
+          </div>
+        </a>
+
+        <a href="pantalones.html" class="group products-showcase-card">
+          <div class="products-showcase-card__media relative overflow-hidden">
+            <img 
+              src="img/pantalones.png" 
+              alt="Pantalones"
+              class="w-full h-full object-cover"/>
+          </div>
+          <div class="products-showcase-card__overlay">
+            <h3 class="products-showcase-card__title">Pantalones</h3>
+          </div>
+        </a>
+
+        <a href="buzos.html" class="group products-showcase-card">
+          <div class="products-showcase-card__media relative overflow-hidden">
+            <img 
+              src="img/bermudas.png" 
+              alt="Buzos"
+              class="w-full h-full object-cover"/>
+          </div>
+          <div class="products-showcase-card__overlay">
+            <h3 class="products-showcase-card__title">Buzos</h3>
+          </div>
+        </a>
+    </div>
+  </section>
+
+  <!-- MÁS PRODUCTOS -->
+  <section id="more-products" class="novedades-section relative">
+    <div class="featured-products-shell mx-auto px-6">
+      <div class="flex items-end justify-between gap-6 mb-4">
+        <div>
+          <h2 class="text-4xl md:text-4xl font-semibold tracking-tight text-black">MÁS DROP</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="pantalon-baggy-azul.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgpantalones/baggy largo azul detras.png" alt="Foto para pantalón baggy azul" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgpantalones/baggy largo azul delante.png" alt="Foto alternativa para pantalón baggy azul" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Pantalón baggy azul</h3>
+            <p class="mt-2 text-base font-bold text-black">$48.000,00</p>
+          </div>
+        </a>
+
+        <a href="bermuda-34-negra.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgpantalones/baggy corto negro detras.png" alt="Foto para bermuda 3/4 negra" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgpantalones/baggy corto negro delante.png" alt="Foto alternativa para bermuda 3/4 negra" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Bermuda 3/4 negra</h3>
+            <p class="mt-2 text-base font-bold text-black">$42.000,00</p>
+          </div>
+        </a>
+
+        <a href="bermuda-34-azul.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgpantalones/baggy corto azul detras.png" alt="Foto para bermuda 3/4 azul" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgpantalones/baggy corto azul detras.png" alt="Foto alternativa para bermuda 3/4 azul" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Bermuda 3/4 azul</h3>
+            <p class="mt-2 text-base font-bold text-black">$42.000,00</p>
+          </div>
+        </a>
+
+        <a href="remera-your-fn-blanca.html" class="group catalog-card">
+          <div class="catalog-card__media relative overflow-hidden">
+            <img src="imgremeras/remera over gris detras.png" alt="Foto de remera gris" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+            <img src="imgremeras/remera over gris detras.png" alt="Foto alternativa de remera gris" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          </div>
+          <div class="catalog-card__body">
+            <h3 class="text-base font-semibold leading-tight text-black">Remera gris YOUR FN</h3>
+            <p class="mt-2 text-base font-bold text-black">$28.000,00</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer id="contact" class="brand-footer">
+    <div class="brand-footer__inner">
+      <div class="brand-footer__accordions">
+        <details class="brand-footer__panel">
+          <summary class="brand-footer__panel-trigger">EMESTUDIOS</summary>
+          <div class="brand-footer__panel-content">
+            <a href="#story">Colección</a>
+            <a href="#size-guide">Guía de talles</a>
+            <a href="#products">Productos</a>
+            <a href="#contact">Contacto</a>
+          </div>
+        </details>
+
+        <details class="brand-footer__panel">
+          <summary class="brand-footer__panel-trigger">Políticas</summary>
+          <div class="brand-footer__panel-content">
+            <a href="#contact">Cambios y devoluciones</a>
+            <a href="#story">Canal legal</a>
+            <a href="#story">Política de privacidad</a>
+          </div>
+        </details>
+
+        <details class="brand-footer__panel">
+          <summary class="brand-footer__panel-trigger">Social</summary>
+          <div class="brand-footer__panel-content">
+            <a href="https://instagram.com/feelnothing.arg" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <a href="https://wa.me/5493413045521" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </div>
+        </details>
+      </div>
+
+      <div class="brand-footer__wordmark" aria-hidden="true">FEELNOTHING</div>
+    </div>
+  </footer>
+
+  <div class="cart-drawer-backdrop" data-cart-backdrop></div>
+  <aside class="cart-drawer" data-cart-drawer aria-hidden="true" aria-labelledby="cart-drawer-title">
+    <div class="cart-drawer__header">
+      <div>
+        <p class="cart-drawer__eyebrow">Tu compra</p>
+        <h2 id="cart-drawer-title" class="cart-drawer__title">Carrito</h2>
+      </div>
+      <button type="button" class="cart-drawer__close" aria-label="Cerrar carrito" data-cart-close>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-drawer__body">
+      <div class="cart-drawer__empty">
+        <div class="cart-drawer__empty-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="20" r="1.6"></circle>
+            <circle cx="17" cy="20" r="1.6"></circle>
+            <path d="M3 4h2.2l2.1 9.1a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8l1.5-6.1H7.1"></path>
+          </svg>
+        </div>
+        <h3>Tu carrito está vacío</h3>
+        <p>Sumá tus prendas favoritas para verlas acá antes de finalizar la compra.</p>
+        <a href="#products" class="cart-drawer__link" data-cart-close>Ver productos</a>
+      </div>
+    </div>
+
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__summary">
+        <span>Subtotal</span>
+        <strong>$0,00</strong>
+      </div>
+      <button type="button" class="cart-drawer__checkout" disabled>Finalizar compra</button>
+      <p class="cart-drawer__hint">El carrito quedó listo como panel deslizante. Si querés, después le conectamos productos y cantidades reales.</p>
+    </div>
+  </aside>
+
+  <!-- JavaScript -->
+  <script>
+    // Spotlight card effect
+    document.addEventListener('DOMContentLoaded', () => {
+      const brandLoader = document.querySelector('.brand-loader');
+
+      window.setTimeout(() => {
+        document.body.classList.add('page-loaded');
+        document.body.classList.remove('is-loading');
+
+        window.setTimeout(() => {
+          brandLoader?.remove();
+        }, 560);
+      }, 2000);
+
+      const cards = document.querySelectorAll('.spotlight-card');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // Navigation active state
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          document.querySelectorAll('.nav-link').forEach(l => {
+            l.classList.remove('active');
+            const indicator = l.querySelector('.nav-link__indicator');
+            if (indicator) indicator.style.width = '0';
+            if (indicator) indicator.style.opacity = '0';
+          });
+          this.classList.add('active');
+          const indicator = this.querySelector('.nav-link__indicator');
+          if (indicator) indicator.style.width = '1.45rem';
+          if (indicator) indicator.style.opacity = '1';
+        });
+      });
+
+      // Mobile menu toggle
+      const nav = document.querySelector('nav');
+      const toggle = nav?.querySelector('[data-mobile-toggle]');
+      const menu = nav?.querySelector('[data-mobile-menu]');
+      const backdrop = nav?.querySelector('[data-mobile-backdrop]');
+
+      if (toggle && menu && backdrop) {
+        const openMenu = () => {
+          menu.classList.add('is-open');
+          backdrop.classList.add('is-open');
+          toggle.classList.add('is-open');
+          document.body.classList.add('menu-open');
+          toggle.setAttribute('aria-expanded', 'true');
+          menu.setAttribute('aria-hidden', 'false');
+        };
+
+        const closeMenu = () => {
+          menu.classList.remove('is-open');
+          backdrop.classList.remove('is-open');
+          toggle.classList.remove('is-open');
+          document.body.classList.remove('menu-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+        };
+
+        toggle.addEventListener('click', () => {
+          const isOpen = menu.classList.contains('is-open');
+          if (isOpen) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+
+        backdrop.addEventListener('click', closeMenu);
+        menu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', closeMenu);
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') closeMenu();
+        });
+      }
+
+    });
+
+
+  </script>
+<script src="js/footer-accordion.js"></script>
+<script src="js/cart.js"></script>
+<script id="dhws-dataInjector" src="/public/dhws-data-injector.js"></script>
+</body>
+</html>
+
+
+
+

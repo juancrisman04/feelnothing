@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Remeras | Feel Nothing</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body class="light-theme catalog-page-body antialiased bg-black text-white selection:bg-red-600 selection:text-white">
+  <nav class="site-header fixed z-50 left-1/2 -translate-x-1/2">
+    <div class="site-header__ticker" aria-label="Novedades de la tienda">
+      <div class="site-header__ticker-marquee">
+        <div class="site-header__ticker-track">
+          <span>COLECCIÓN 2026 DISPONIBLE AHORA</span>
+          <span>STREETWEAR ARGENTINO</span>
+          <span>3 CUOTAS SIN INTERÉS EN SELECCIONADOS</span>
+        </div>
+        <div class="site-header__ticker-track" aria-hidden="true">
+          <span>COLECCIÓN 2026 DISPONIBLE AHORA</span>
+          <span>STREETWEAR ARGENTINO</span>
+          <span>3 CUOTAS SIN INTERÉS EN SELECCIONADOS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-header__shell">
+      <button type="button" class="site-header-burger" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="site-header__side site-header__side--left hidden md:flex">
+        <a href="index.html#products" class="nav-link">
+          <span class="nav-link__label">Tienda</span>
+          <span class="nav-link__indicator"></span>
+        </a>
+        <a href="index.html#story" class="nav-link">
+          <span class="nav-link__label">Colección</span>
+          <span class="nav-link__indicator"></span>
+        </a>
+        <a href="index.html#more-products" class="nav-link">
+          <span class="nav-link__label">Drop</span>
+          <span class="nav-link__indicator"></span>
+        </a>
+        <a href="index.html#contact" class="nav-link">
+          <span class="nav-link__label">Contacto</span>
+          <span class="nav-link__indicator"></span>
+        </a>
+      </div>
+
+      <a href="index.html#inicio" class="site-header-brand" aria-label="Ir al inicio">
+        <img src="img/logo.png" alt="Feel Nothing" class="site-header-logo">
+      </a>
+
+      <div class="site-header__side site-header__side--right">
+        <a href="https://wa.me/5493413045521" target="_blank" rel="noopener noreferrer" class="site-header-action site-header-action--icon" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="site-header-action__icon">
+            <path d="M12 4.2a7.8 7.8 0 0 0-6.64 11.9L4.3 19.7l3.72-.98A7.8 7.8 0 1 0 12 4.2Z" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M9.18 8.92c.12-.28.3-.32.56-.33h.48c.16 0 .38.05.5.33l.7 1.72c.09.22.07.39-.02.54l-.31.51c-.09.14-.07.27.01.39.43.73 1.08 1.36 1.84 1.79.15.08.28.08.4-.01l.56-.38c.15-.1.34-.13.53-.04l1.63.73c.24.11.36.28.36.49v.43c0 .25-.11.44-.3.57-.46.3-1.14.48-1.78.41-1.28-.14-2.56-.76-3.62-1.82-1.06-1.06-1.68-2.34-1.81-3.61-.07-.63.11-1.31.39-1.73Z" fill="currentColor"></path>
+          </svg>
+        </a>
+        <button type="button" class="site-header-action site-header-action--primary site-header-action--cart" aria-label="Abrir carrito" data-cart-toggle aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="site-header-action__icon">
+            <path d="M6.8 8.2h10.4l.8 10.6H6L6.8 8.2Z" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"></path>
+            <path d="M9.3 8.2V7a2.7 2.7 0 0 1 5.4 0v1.2" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round"></path>
+          </svg>
+          <span class="site-header-action__badge">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="catalog-page">
+    <section class="catalog-page__hero">
+      <div>
+        <h1 class="catalog-page__title">Remeras</h1>
+      </div>
+      <div class="catalog-page__controls" aria-label="Controles de vista">
+        <button type="button" class="catalog-page__control" data-catalog-view-trigger="2">2</button>
+        <button type="button" class="catalog-page__control is-active" data-catalog-view-trigger="4">VISTA 4</button>
+        <button type="button" class="catalog-page__control" aria-label="Vista prenda">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 4.5 10.2 3h3.6L16 4.5l3 1v4l-2-1v11H7v-11l-2 1v-4l3-1Z"></path>
+          </svg>
+        </button>
+        <button type="button" class="catalog-page__control" aria-label="Vista persona">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="5.5" r="2.5"></circle>
+            <path d="M12 8v5"></path>
+            <path d="M8.5 12.5 6 20"></path>
+            <path d="M15.5 12.5 18 20"></path>
+            <path d="M9 10.5 6 13"></path>
+            <path d="M15 10.5 18 13"></path>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <section class="catalog-grid" data-catalog-grid>
+      <a href="remera-street-culture-marron.html" class="catalog-editorial-card">
+        <div class="catalog-editorial-card__media">
+          <span class="catalog-editorial-card__badge">New in</span>
+          <img src="imgremeras/remera over marron detras.png" alt="Remera oversize Street Culture marrón">
+          <img src="imgremeras/remera over marron detras.png" alt="Remera oversize Street Culture marrón vista alternativa">
+        </div>
+        <div class="catalog-editorial-card__body">
+          <div>
+            <h2 class="catalog-editorial-card__title">Remera oversize STREET CULTURE marrón</h2>
+            <p class="catalog-editorial-card__note">$24.500 por transferencia</p>
+          </div>
+          <p class="catalog-editorial-card__price">$28.000</p>
+        </div>
+      </a>
+
+      <a href="remera-street-culture-negra.html" class="catalog-editorial-card">
+        <div class="catalog-editorial-card__media">
+          <span class="catalog-editorial-card__badge">New in</span>
+          <img src="imgremeras/remera over negra detras.png" alt="Remera oversize Street Culture negra">
+          <img src="imgremeras/remera over negra detras.png" alt="Remera oversize Street Culture negra vista alternativa">
+        </div>
+        <div class="catalog-editorial-card__body">
+          <div>
+            <h2 class="catalog-editorial-card__title">Remera oversize STREET CULTURE negra</h2>
+            <p class="catalog-editorial-card__note">$24.500 por transferencia</p>
+          </div>
+          <p class="catalog-editorial-card__price">$28.000</p>
+        </div>
+      </a>
+
+      <a href="remera-your-fn-beige.html" class="catalog-editorial-card">
+        <div class="catalog-editorial-card__media">
+          <span class="catalog-editorial-card__badge">New in</span>
+          <img src="imgremeras/remera over beige detras.png" alt="Remera oversize Your FN beige">
+          <img src="imgremeras/remera over beige detras.png" alt="Remera oversize Your FN beige vista alternativa">
+        </div>
+        <div class="catalog-editorial-card__body">
+          <div>
+            <h2 class="catalog-editorial-card__title">Remera oversize YOUR FN beige</h2>
+            <p class="catalog-editorial-card__note">$24.500 por transferencia</p>
+          </div>
+          <p class="catalog-editorial-card__price">$28.000</p>
+        </div>
+      </a>
+
+      <a href="remera-your-fn-blanca.html" class="catalog-editorial-card">
+        <div class="catalog-editorial-card__media">
+          <span class="catalog-editorial-card__badge">New in</span>
+          <img src="imgremeras/remera over blanca detras.png" alt="Remera oversize Your FN blanca">
+          <img src="imgremeras/remera over blanca detras.png" alt="Remera oversize Your FN blanca vista alternativa">
+        </div>
+        <div class="catalog-editorial-card__body">
+          <div>
+            <h2 class="catalog-editorial-card__title">Remera oversize YOUR FN blanca</h2>
+            <p class="catalog-editorial-card__note">$24.500 por transferencia</p>
+          </div>
+          <p class="catalog-editorial-card__price">$28.000</p>
+        </div>
+      </a>
+
+      <a href="remera-your-fn-gris.html" class="catalog-editorial-card">
+        <div class="catalog-editorial-card__media">
+          <span class="catalog-editorial-card__badge">New in</span>
+          <img src="imgremeras/remera over gris detras.png" alt="Remera oversize Your FN gris">
+          <img src="imgremeras/remera over gris detras.png" alt="Remera oversize Your FN gris vista alternativa">
+        </div>
+        <div class="catalog-editorial-card__body">
+          <div>
+            <h2 class="catalog-editorial-card__title">Remera oversize YOUR FN gris</h2>
+            <p class="catalog-editorial-card__note">$24.500 por transferencia</p>
+          </div>
+          <p class="catalog-editorial-card__price">$28.000</p>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <footer class="catalog-page-footer">
+    <div class="catalog-page-footer__box">
+      <p>FEEL NOTHING 2026</p>
+      <p>Envíos a todo el país · Cambios por talle · Soporte por WhatsApp</p>
+    </div>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/catalog-view.js"></script>
+</body>
+</html>
