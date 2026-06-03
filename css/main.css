@@ -3605,7 +3605,7 @@ body.cart-open {
 }
 
 .novedades-section {
-  padding-top: 3.2rem;
+  padding-top: 7rem;
   padding-bottom: 3.2rem;
 }
 
@@ -3617,11 +3617,11 @@ body.cart-open {
 
 .products-section {
   padding-top: 0;
-  padding-bottom: 3.2rem;
+  padding-bottom: 0;
 }
 
 #more-products {
-  padding-top: 3.2rem;
+  padding-top: 7rem;
 }
 
 .flex-shrink-0 {
@@ -4539,7 +4539,7 @@ body.cart-open {
   }
 
   .novedades-section {
-    padding-top: 2.1rem;
+    padding-top: 4.2rem;
   }
 
   .novedades-section .featured-products-shell {
