@@ -519,11 +519,15 @@ document.addEventListener('DOMContentLoaded', () => {
           .map(
             (item) => `
               <article class="cart-item">
-                <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" class="cart-item__image">
+                <a href="${escapeHtml(item.url || 'index.html')}" class="cart-item__image-link">
+                  <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" class="cart-item__image">
+                </a>
                 <div class="cart-item__content">
                   <div class="cart-item__top">
                     <div class="cart-item__info">
-                      <p class="cart-item__title">${escapeHtml(item.title)}</p>
+                      <a href="${escapeHtml(item.url || 'index.html')}" class="cart-item__title-link">
+                        <p class="cart-item__title">${escapeHtml(item.title)}</p>
+                      </a>
                       <p class="cart-item__price">${formatPrice(item.price)}</p>
                       <p class="cart-item__meta">TALLA ${escapeHtml(item.size)}</p>
                     </div>
@@ -640,7 +644,8 @@ document.addEventListener('DOMContentLoaded', () => {
         title,
         price: parsePrice(priceText),
         image,
-        size
+        size,
+        url: window.location.pathname.split('/').pop() || 'index.html'
       });
     });
   }
