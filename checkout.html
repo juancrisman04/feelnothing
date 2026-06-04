@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Feel Nothing</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body class="checkout-page">
+  <main class="checkout-page__frame" aria-labelledby="checkout-title">
+    <section class="checkout-full" data-checkout-root>
+      <header class="checkout-full__brand">
+        <a href="index.html" aria-label="Volver a Feel Nothing">
+          <img src="img/logo.png" alt="Feel Nothing" class="checkout-full__logo">
+        </a>
+      </header>
+
+      <section class="checkout-full__summary" aria-label="Resumen del pedido">
+        <button type="button" class="checkout-full__summary-toggle" data-summary-toggle aria-expanded="false">
+          <div>
+            <span>Resumen del pedido</span>
+            <span class="checkout-full__summary-arrow" aria-hidden="true"></span>
+          </div>
+          <strong data-checkout-grand-total>$0</strong>
+        </button>
+
+        <div class="checkout-full__summary-content" data-summary-content>
+          <div class="checkout-full__summary-content-inner">
+            <div class="checkout-full__items" data-checkout-items></div>
+
+            <form class="checkout-shipping-estimator" data-shipping-form>
+              <label for="checkout-postal">Codigo postal</label>
+              <div>
+                <input id="checkout-postal" name="postalCode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="Codigo postal">
+                <button type="submit" aria-label="Calcular envio"><span></span></button>
+              </div>
+              <p data-shipping-message>Ingresa tu codigo postal para calcular el envio.</p>
+            </form>
+
+            <div class="checkout-full__totals">
+              <div>
+                <span>Subtotal - <b data-checkout-count>0 articulos</b></span>
+                <strong data-checkout-subtotal>$0</strong>
+              </div>
+              <div>
+                <span>Envio</span>
+                <strong data-checkout-shipping>Calculado en el siguiente paso</strong>
+              </div>
+              <div class="checkout-full__total-row">
+                <span>Total</span>
+                <strong data-checkout-total>$0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <nav class="checkout-full__steps" aria-label="Estado del checkout">
+        <span data-step-label="info" class="is-active">Informacion y envio</span>
+        <i aria-hidden="true">></i>
+        <span data-step-label="payment">Pago</span>
+      </nav>
+
+      <section class="checkout-full__body">
+        <form class="checkout-full__form" data-checkout-form novalidate>
+          <div class="checkout-full__section">
+            <div class="checkout-full__heading">
+              <h1 id="checkout-title">Contacto</h1>
+            </div>
+            <div class="checkout-field-group">
+              <input type="email" name="email" placeholder="Correo electronico" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="checkout-full__section">
+            <h2>Direccion de envio</h2>
+            <div class="checkout-full__row">
+              <div class="checkout-field-group">
+                <input type="text" name="firstName" placeholder="Nombre" autocomplete="given-name" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras">
+              </div>
+              <div class="checkout-field-group">
+                <input type="text" name="lastName" placeholder="Apellidos" autocomplete="family-name" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras">
+              </div>
+            </div>
+            <div class="checkout-field-group">
+              <input type="text" name="document" placeholder="DNI (8 dígitos)" required pattern="\d{8}" title="Debe tener exactamente 8 números" inputmode="numeric">
+            </div>
+            <div class="checkout-field-group">
+              <input type="text" name="address" placeholder="Direccion" autocomplete="street-address" required>
+            </div>
+            <div class="checkout-full__row">
+              <div class="checkout-field-group">
+                <input type="text" name="postalCode" placeholder="Codigo postal" autocomplete="postal-code" required>
+              </div>
+              <div class="checkout-field-group">
+                <input type="text" name="city" placeholder="Ciudad" autocomplete="address-level2" required>
+              </div>
+            </div>
+            <div class="checkout-field-group">
+              <div class="checkout-full__phone-group">
+                <span class="checkout-full__phone-prefix">+54</span>
+                <input type="tel" name="phone" placeholder="Teléfono (10 dígitos sin el 0 ni el 15)" autocomplete="tel" required pattern="\d{10}" title="Debe tener 10 números (ej: 1122334455)" inputmode="tel">
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <section class="checkout-full__review" data-checkout-review hidden></section>
+      </section>
+
+      <footer class="checkout-full__footer">
+        <button type="button" class="checkout-full__primary" data-checkout-primary>Continuar con el pago</button>
+        <a href="index.html" class="checkout-full__back">Volver a la tienda</a>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // Si viene del carrito, mostrar el loader de transicion
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('from') === 'cart') {
+      document.body.insertAdjacentHTML('afterbegin', `
+        <div class="brand-loader" aria-label="Cargando FEEL NOTHING" role="status">
+          <div class="brand-loader__mark">
+            <img src="img/logo.png" alt="FEEL NOTHING" class="brand-loader__logo">
+          </div>
+          <span class="brand-loader__line" aria-hidden="true"></span>
+        </div>
+      `);
+      document.body.classList.add('is-loading');
+      
+      window.addEventListener('load', () => {
+        const brandLoader = document.querySelector('.brand-loader');
+        window.setTimeout(() => {
+          document.body.classList.add('page-loaded');
+          document.body.classList.remove('is-loading');
+          window.setTimeout(() => {
+            brandLoader?.remove();
+          }, 560);
+        }, 1000);
+      });
+    }
+  </script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

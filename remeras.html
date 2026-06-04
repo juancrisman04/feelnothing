@@ -11,7 +11,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
-<body class="light-theme catalog-page-body antialiased bg-black text-white selection:bg-red-600 selection:text-white">
+<body class="is-loading light-theme catalog-page-body antialiased bg-black text-white selection:bg-red-600 selection:text-white">
+  <div class="brand-loader" aria-label="Cargando FEEL NOTHING" role="status">
+    <div class="brand-loader__mark">
+      <img src="img/logo.png" alt="FEEL NOTHING" class="brand-loader__logo">
+    </div>
+    <span class="brand-loader__line" aria-hidden="true"></span>
+  </div>
+
   <nav class="site-header fixed z-50 left-1/2 -translate-x-1/2">
     <div class="site-header__ticker" aria-label="Novedades de la tienda">
       <div class="site-header__ticker-marquee">
@@ -186,6 +193,18 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const brandLoader = document.querySelector('.brand-loader');
+      window.setTimeout(() => {
+        document.body.classList.add('page-loaded');
+        document.body.classList.remove('is-loading');
+        window.setTimeout(() => {
+          brandLoader?.remove();
+        }, 560);
+      }, 2000);
+    });
+  </script>
   <script src="js/cart.js"></script>
   <script src="js/catalog-view.js"></script>
 </body>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pago | Feel Nothing</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body class="checkout-page">
+  <main class="checkout-page__frame">
+    <section class="checkout-full" data-payment-root>
+      <header class="checkout-full__brand">
+        <a href="index.html" aria-label="Volver a Feel Nothing">
+          <img src="img/logo.png" alt="Feel Nothing" class="checkout-full__logo">
+        </a>
+      </header>
+
+      <section class="checkout-full__summary" aria-label="Resumen del pedido">
+        <button type="button" class="checkout-full__summary-toggle" data-summary-toggle aria-expanded="false">
+          <div>
+            <span>Resumen del pedido</span>
+            <span class="checkout-full__summary-arrow" aria-hidden="true"></span>
+          </div>
+          <strong data-payment-grand-total>$0</strong>
+        </button>
+
+        <div class="checkout-full__summary-content" data-summary-content>
+          <div class="checkout-full__summary-content-inner">
+            <div class="checkout-full__items" data-payment-items></div>
+            <div class="checkout-full__totals">
+              <div>
+                <span>Subtotal - <b data-payment-count>0 articulos</b></span>
+                <strong data-payment-subtotal>$0</strong>
+              </div>
+              <div>
+                <span>Envio</span>
+                <strong data-payment-shipping>$0</strong>
+              </div>
+              <div class="checkout-full__total-row">
+                <span>Total</span>
+                <strong data-payment-total>$0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <nav class="checkout-full__steps" aria-label="Estado del checkout">
+        <span>Informacion y envio</span>
+        <i aria-hidden="true">></i>
+        <span class="is-active">Pago</span>
+      </nav>
+
+      <section class="checkout-full__body">
+        <div class="checkout-full__review">
+          <div class="checkout-review-row">
+            <span>Contacto</span>
+            <strong data-payment-contact></strong>
+            <button type="button" data-payment-back>Cambiar</button>
+          </div>
+          <div class="checkout-review-row">
+            <span>Enviar a</span>
+            <strong data-payment-shipping-full></strong>
+            <button type="button" data-payment-back>Cambiar</button>
+          </div>
+        </div>
+
+        <div class="checkout-full__section" style="margin-top: 2rem;">
+          <h2>Metodo de pago</h2>
+          <p style="font-size: 0.85rem; color: #707070; margin-bottom: 0.8rem;">Finaliza tu compra via WhatsApp para coordinar el pago.</p>
+          <div class="checkout-payment-method">
+            <strong>WhatsApp (Efectivo / Transferencia)</strong>
+            <p>Al confirmar, se abrirá un chat de WhatsApp con tu pedido ya listo.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="checkout-full__footer">
+        <button type="button" class="checkout-full__primary" data-payment-submit>Pagar</button>
+        <a href="index.html" class="checkout-full__back">Volver a la tienda</a>
+      </footer>
+    </section>
+  </main>
+
+  <script src="js/payment.js"></script>
+  </body>
+</html>
