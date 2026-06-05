@@ -5738,6 +5738,7 @@ section {
   width: 0.75rem;
   height: 0.75rem;
   pointer-events: none;
+  transform: translateY(-0.04rem); /* Pequeño ajuste óptico hacia arriba */
 }
 
 .quick-add-btn:hover {
