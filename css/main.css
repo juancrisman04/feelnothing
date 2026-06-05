@@ -1150,7 +1150,7 @@ body.light-theme .brand-footer {
   display: grid;
   overflow: hidden;
   background: #ededed;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
 }
 
 .catalog-card .catalog-card__media {
@@ -1305,7 +1305,7 @@ body.light-theme .brand-footer {
   padding: 0.55rem 0.8rem;
   border: 1px solid rgba(17, 17, 17, 0.08);
   background: rgba(255, 255, 255, 0.88);
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   font-size: 0.84rem;
   font-weight: 600;
   color: #111111;
@@ -1372,7 +1372,7 @@ body.light-theme .brand-footer {
   padding: 0.55rem 0.9rem;
   border: 1px solid rgba(17, 17, 17, 0.08);
   background: rgba(255, 255, 255, 0.7);
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   font-size: 0.84rem;
   font-weight: 600;
   color: #111111;
@@ -1565,12 +1565,12 @@ body.light-theme .brand-footer {
 
 .products-showcase-card__media {
   aspect-ratio: 3 / 4;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   overflow: hidden;
 }
 
 .fn-rounded-media {
-  border-radius: 0.35rem !important;
+  border-radius: 0.5rem !important;
   overflow: hidden;
 }
 
@@ -1580,7 +1580,7 @@ body.light-theme .brand-footer {
   }
   
   .products-showcase-card__media {
-    border-radius: 0.14rem;
+    border-radius: 0.2rem;
   }
 }
 
@@ -2171,7 +2171,7 @@ body.light-theme .brand-footer {
   }
 
   .product-detail-thumb {
-    border-radius: 0.14rem;
+    border-radius: 0.2rem;
   }
 
   .product-detail-panel {
@@ -3480,7 +3480,7 @@ body.menu-open {
   width: 3.75rem;
   height: 3.75rem;
   object-fit: contain;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   background: #ffffff;
 }
 
@@ -3728,7 +3728,7 @@ body.menu-open {
   min-height: 2.85rem;
   padding: 0 0.85rem;
   border: 1px solid #d1d1d1;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   background: #ffffff;
   color: #000000;
   font-size: 16px;
@@ -3740,7 +3740,7 @@ body.menu-open {
   align-items: center;
   justify-content: center;
   border: 1px solid #d1d1d1;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   background: #f8f8f8;
   color: #707070;
   cursor: pointer;
@@ -3873,7 +3873,7 @@ body.menu-open {
   grid-template-columns: auto 1fr;
   align-items: center;
   border: 1px solid #d1d1d1;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   background: #ffffff;
   overflow: hidden;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -3904,7 +3904,7 @@ body.menu-open {
   min-height: 2.85rem;
   padding: 0 0.85rem;
   border: 1px solid #d1d1d1;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   background: #ffffff;
   color: #000000;
   font-size: 16px;
@@ -3995,7 +3995,7 @@ body.menu-open {
   min-height: 3rem;
   width: 100%;
   border: 0;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   background: #ece7df;
   color: #000000;
   font-size: 0.95rem;
@@ -4049,7 +4049,7 @@ body.menu-open {
   align-items: center;
   justify-content: center;
   padding: 0 1.2rem;
-  border-radius: 0.35rem;
+  border-radius: 0.5rem;
   background: #000000;
   color: #ffffff;
   font-weight: 700;
@@ -5501,7 +5501,7 @@ body.cart-open {
   }
 
   .novedades-section .catalog-card__media {
-    border-radius: 0.14rem;
+    border-radius: 0.2rem;
   }
 
   .novedades-section .catalog-card__body {
@@ -5851,4 +5851,5 @@ section {
     max-width: 100%;
     border-radius: 0;
   }
+}
 }
