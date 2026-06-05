@@ -5728,7 +5728,7 @@ section {
   justify-content: center;
   transition: transform 0.2s ease, background-color 0.2s ease;
   padding: 0;
-  padding-bottom: 0.22rem; /* Ajuste para centrar ópticamente el signo + */
+  padding-bottom: 0.3rem; /* Ajuste más pronunciado para centrar el signo + */
   border: none;
   cursor: pointer;
   color: #000000;
