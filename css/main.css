@@ -5728,13 +5728,16 @@ section {
   justify-content: center;
   transition: transform 0.2s ease, background-color 0.2s ease;
   padding: 0;
-  padding-bottom: 0.18rem; /* Reducido para bajar el signo + tras haberme pasado */
   border: none;
   cursor: pointer;
   color: #000000;
-  font-size: 1.3rem;
-  font-weight: 100;
-  line-height: 1;
+}
+
+.quick-add-btn svg {
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+  pointer-events: none;
 }
 
 .quick-add-btn:hover {
@@ -5851,5 +5854,4 @@ section {
     max-width: 100%;
     border-radius: 0;
   }
-}
 }
