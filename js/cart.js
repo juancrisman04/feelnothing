@@ -596,6 +596,12 @@ document.addEventListener('DOMContentLoaded', () => {
     openCart();
   };
 
+  document.addEventListener('cart:add', (event) => {
+    if (event.detail && event.detail.product) {
+      addToCart(event.detail.product);
+    }
+  });
+
   if (cartToggle) {
     cartToggle.addEventListener('click', () => {
       const isOpen = cartDrawer?.classList.contains('is-open');

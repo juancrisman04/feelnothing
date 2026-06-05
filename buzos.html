@@ -12,7 +12,7 @@
   <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 <body class="light-theme catalog-page-body antialiased bg-black text-white selection:bg-red-600 selection:text-white">
-  <nav class="site-header fixed z-50 left-1/2 -translate-x-1/2">
+  <nav class="site-header fixed z-50 left-1/2 -translate-x-1/2 px-4">
     <div class="site-header__ticker" aria-label="Novedades de la tienda">
       <div class="site-header__ticker-marquee">
         <div class="site-header__ticker-track">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="site-header__shell">
-      <button type="button" class="site-header-burger" aria-label="Abrir menu">
+      <button type="button" class="site-header-burger" aria-label="Abrir menu" data-mobile-toggle aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -43,8 +43,8 @@
           <span class="nav-link__label">Colección</span>
           <span class="nav-link__indicator"></span>
         </a>
-        <a href="index.html#more-products" class="nav-link">
-          <span class="nav-link__label">Drop</span>
+        <a href="index.html#size-guide" class="nav-link">
+          <span class="nav-link__label">Talles</span>
           <span class="nav-link__indicator"></span>
         </a>
         <a href="index.html#contact" class="nav-link">
@@ -73,77 +73,77 @@
         </button>
       </div>
     </div>
+    <div class="mobile-menu-backdrop" data-mobile-backdrop></div>
+    <div id="mobile-menu" class="mobile-menu-panel" data-mobile-menu aria-hidden="true">
+      <div class="mobile-menu-panel__inner">
+        <a href="index.html#story" class="mobile-menu-panel__link">FEEL NOTHING</a>
+        <details class="mobile-menu-panel__group">
+          <summary class="mobile-menu-panel__summary">Productos</summary>
+          <div class="mobile-menu-panel__subnav">
+            <a href="remeras.html">Remeras</a>
+            <a href="pantalones.html">Pantalones</a>
+            <a href="buzos.html">Buzos</a>
+          </div>
+        </details>
+        <a href="index.html#contact" class="mobile-menu-panel__link">Políticas</a>
+      </div>
+    </div>
   </nav>
 
   <main class="catalog-page">
     <section class="catalog-page__hero">
-      <div>
-        <h1 class="catalog-page__title">Buzos</h1>
-      </div>
+      <h1 class="catalog-page__title">Buzos</h1>
       <div class="catalog-page__controls" aria-label="Controles de vista">
-        <button type="button" class="catalog-page__control" data-catalog-view-trigger="2">2</button>
-        <button type="button" class="catalog-page__control is-active" data-catalog-view-trigger="4">VISTA 4</button>
+        <button type="button" class="catalog-page__control" data-catalog-view-trigger="1">1</button>
+        <button type="button" class="catalog-page__control is-active" data-catalog-view-trigger="2">2</button>
         <button type="button" class="catalog-page__control" aria-label="Vista prenda">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 4.5 10.2 3h3.6L16 4.5l3 1v4l-2-1v11H7v-11l-2 1v-4l3-1Z"></path>
+            <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10a2 2 0 002 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
           </svg>
         </button>
         <button type="button" class="catalog-page__control" aria-label="Vista persona">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="5.5" r="2.5"></circle>
-            <path d="M12 8v5"></path>
-            <path d="M8.5 12.5 6 20"></path>
-            <path d="M15.5 12.5 18 20"></path>
-            <path d="M9 10.5 6 13"></path>
-            <path d="M15 10.5 18 13"></path>
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </button>
       </div>
     </section>
 
-    <section class="catalog-grid" data-catalog-grid>
-      <article class="catalog-editorial-card">
-        <div class="catalog-editorial-card__media">
-          <span class="catalog-editorial-card__badge">New in</span>
-          <img src="img/bermudas.png" alt="Hoodie marrón">
-          <img src="img/bermudas.png" alt="Hoodie marrón vista alternativa">
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-4" data-catalog-grid>
+      <article class="group catalog-card">
+        <div class="catalog-card__media relative overflow-hidden">
+        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito">+</button>
+          <img src="img/bermudas.png" alt="Hoodie marrón" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+          <img src="img/bermudas.png" alt="Hoodie marrón vista alternativa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
         </div>
-        <div class="catalog-editorial-card__body">
-          <div>
-            <h2 class="catalog-editorial-card__title">Hoodie marrón</h2>
-            <p class="catalog-editorial-card__note">Proximamente disponible</p>
-          </div>
-          <p class="catalog-editorial-card__price">Soon</p>
+        <div class="catalog-card__body">
+          <h3 class="text-base font-semibold leading-tight text-black">Hoodie marrón</h3>
+          <p class="mt-2 text-base font-bold text-black">Soon</p>
         </div>
       </article>
 
-      <article class="catalog-editorial-card">
-        <div class="catalog-editorial-card__media">
-          <span class="catalog-editorial-card__badge">New in</span>
-          <img src="img/bermudas.png" alt="Hoodie negro">
-          <img src="img/bermudas.png" alt="Hoodie negro vista alternativa">
+      <article class="group catalog-card">
+        <div class="catalog-card__media relative overflow-hidden">
+        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito">+</button>
+          <img src="img/bermudas.png" alt="Hoodie negro" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+          <img src="img/bermudas.png" alt="Hoodie negro vista alternativa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
         </div>
-        <div class="catalog-editorial-card__body">
-          <div>
-            <h2 class="catalog-editorial-card__title">Hoodie negro</h2>
-            <p class="catalog-editorial-card__note">Proximamente disponible</p>
-          </div>
-          <p class="catalog-editorial-card__price">Soon</p>
+        <div class="catalog-card__body">
+          <h3 class="text-base font-semibold leading-tight text-black">Hoodie negro</h3>
+          <p class="mt-2 text-base font-bold text-black">Soon</p>
         </div>
       </article>
 
-      <article class="catalog-editorial-card">
-        <div class="catalog-editorial-card__media">
-          <span class="catalog-editorial-card__badge">New in</span>
-          <img src="img/bermudas.png" alt="Hoodie beige">
-          <img src="img/bermudas.png" alt="Hoodie beige vista alternativa">
+      <article class="group catalog-card">
+        <div class="catalog-card__media relative overflow-hidden">
+        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito">+</button>
+          <img src="img/bermudas.png" alt="Hoodie beige" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
+          <img src="img/bermudas.png" alt="Hoodie beige vista alternativa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
         </div>
-        <div class="catalog-editorial-card__body">
-          <div>
-            <h2 class="catalog-editorial-card__title">Hoodie beige</h2>
-            <p class="catalog-editorial-card__note">Proximamente disponible</p>
-          </div>
-          <p class="catalog-editorial-card__price">Soon</p>
+        <div class="catalog-card__body">
+          <h3 class="text-base font-semibold leading-tight text-black">Hoodie beige</h3>
+          <p class="mt-2 text-base font-bold text-black">Soon</p>
         </div>
       </article>
     </section>
@@ -156,7 +156,9 @@
     </div>
   </footer>
 
+  <script src="js/mobile-menu.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/quick-add.js"></script>
   <script src="js/catalog-view.js"></script>
 </body>
 </html>

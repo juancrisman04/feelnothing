@@ -3,7 +3,13 @@ const viewTriggers = document.querySelectorAll("[data-catalog-view-trigger]");
 
 if (catalogGrid && viewTriggers.length) {
   const setCatalogView = (columns) => {
-    catalogGrid.classList.toggle("is-two-columns", columns === "2");
+    if (columns === "1") {
+      catalogGrid.classList.add("grid-cols-1");
+      catalogGrid.classList.remove("grid-cols-2");
+    } else {
+      catalogGrid.classList.add("grid-cols-2");
+      catalogGrid.classList.remove("grid-cols-1");
+    }
 
     viewTriggers.forEach((trigger) => {
       const isActive = trigger.dataset.catalogViewTrigger === columns;
