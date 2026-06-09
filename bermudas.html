@@ -113,7 +113,7 @@
     <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
       <a href="bermuda-34-negra.html" class="group catalog-card">
         <div class="catalog-card__media relative overflow-hidden">
-        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
           <img src="imgpantalones/baggy corto negro detras.png" alt="Bermuda 3/4 negra" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
           <img src="imgpantalones/baggy corto negro delante.png" alt="Bermuda 3/4 negra vista alternativa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
         </div>
@@ -125,7 +125,7 @@
 
       <a href="bermuda-34-azul.html" class="group catalog-card">
         <div class="catalog-card__media relative overflow-hidden">
-        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
           <img src="imgpantalones/baggy corto azul detras.png" alt="Bermuda 3/4 azul" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0">
           <img src="imgpantalones/baggy corto azul detras.png" alt="Bermuda 3/4 azul vista alternativa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
         </div>
@@ -137,15 +137,46 @@
     </section>
   </main>
 
-  <footer class="catalog-page-footer">
-    <div class="catalog-page-footer__box">
-      <p>FEEL NOTHING 2026</p>
-      <p>Bermudas 3/4, cambios por talle y seguimiento por WhatsApp</p>
+  <footer id="contact" class="brand-footer">
+    <div class="brand-footer__inner">
+      <div class="brand-footer__accordions">
+        <details class="brand-footer__panel">
+          <summary class="brand-footer__panel-trigger">feelnothing</summary>
+          <div class="brand-footer__panel-content">
+            <a href="index.html#story">Historia</a>
+            <a href="index.html#products">Colección</a>
+            <a href="index.html#size-guide">Guía de talles</a>
+            <a href="https://wa.me/5493413045521" target="_blank">Contacto</a>
+          </div>
+        </details>
+
+        <details class="brand-footer__panel">
+          <summary class="brand-footer__panel-trigger">políticas</summary>
+          <div class="brand-footer__panel-content">
+            <a href="#">Cambios y devoluciones</a>
+            <a href="#">Pagos</a>
+            <a href="#">Envíos</a>
+          </div>
+        </details>
+
+        <details class="brand-footer__panel">
+          <summary class="brand-footer__panel-trigger">redes sociales</summary>
+          <div class="brand-footer__panel-content">
+            <a href="https://instagram.com/feelnothing.arg" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://wa.me/5493413045521" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">TikTok</a>
+          </div>
+        </details>
+      </div>
+
+      <div class="brand-footer__wordmark" aria-hidden="true">FEELNOTHING</div>
     </div>
   </footer>
 
   <script src="js/mobile-menu.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/quick-add.js"></script>
+  <script src="js/catalog-view.js"></script>
+  <script src="js/footer-accordion.js"></script>
 </body>
 </html>
