@@ -564,6 +564,14 @@ body.is-loading {
   overflow: hidden;
 }
 
+html.brand-loader-off body.is-loading {
+  overflow: visible;
+}
+
+html.brand-loader-off .brand-loader {
+  display: none !important;
+}
+
 .brand-loader {
   position: fixed;
   inset: 0;
@@ -1709,7 +1717,7 @@ body.light-theme .brand-footer {
 .product-detail-gallery-shell {
   display: grid;
   grid-template-columns: 5.9rem minmax(0, 1fr);
-  gap: 0;
+  gap: 0.5rem;
   align-items: stretch;
   min-height: 100%;
   background: transparent;
@@ -1718,6 +1726,7 @@ body.light-theme .brand-footer {
 }
 
 .product-detail-thumbs {
+  position: relative;
   display: grid;
   gap: 0.65rem;
   align-content: start;
@@ -1733,6 +1742,17 @@ body.light-theme .brand-footer {
   -ms-overflow-style: none;
 }
 
+.product-detail-thumb-indicator {
+  position: absolute;
+  border: 1.5px solid #000;
+  border-radius: 0.16rem;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+  opacity: 0;
+  display: block;
+}
+
 .product-detail-thumbs::-webkit-scrollbar {
   display: none;
 }
@@ -1746,13 +1766,15 @@ body.light-theme .brand-footer {
   background: #ededed;
   cursor: pointer;
   box-shadow: none;
-  transition: border-color 0.18s ease;
+  transition: opacity 0.18s ease;
 }
 
-.product-detail-thumb:hover,
+.product-detail-thumb:hover {
+  opacity: 0.8;
+}
+
 .product-detail-thumb.is-active {
-  border-color: rgba(17, 17, 17, 0.95);
-  box-shadow: none;
+  border-color: transparent;
 }
 
 .product-detail-thumb img {
@@ -2127,7 +2149,7 @@ body.light-theme .brand-footer {
 
   .product-detail-thumbs {
     order: 2;
-    position: static;
+    position: relative;
     width: auto;
     height: auto;
     grid-auto-flow: column;

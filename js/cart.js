@@ -15,7 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const rawCart = localStorage.getItem(STORAGE_KEY);
       const parsedCart = rawCart ? JSON.parse(rawCart) : [];
-      return Array.isArray(parsedCart) ? parsedCart : [];
+      if (!Array.isArray(parsedCart)) return [];
+
+      // Sanitize image paths for legacy data or mismatched paths
+      return parsedCart.map((item) => {
+        if (item.image && (item.image.includes('imgremeras/') || item.image.includes('imgpantalones/'))) {
+          item.image = item.image.replace(/ /g, '-');
+        }
+        return item;
+      });
     } catch (error) {
       return [];
     }
@@ -629,7 +637,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const title = document.querySelector('.product-detail-title')?.textContent?.trim();
       const priceText = document.querySelector('.product-detail-price')?.textContent?.trim();
-      const image = document.querySelector('[data-product-main]')?.getAttribute('src');
+      const imageRaw = document.querySelector('[data-product-main]')?.getAttribute('src') || '';
+      const image = imageRaw.replace(/ /g, '-');
       const size = detailAddButton.dataset.selectedSize?.trim();
 
       if (!size) {

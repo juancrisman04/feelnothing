@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const product = {
                 title: btn.dataset.productTitle || (isEditorial ? card.querySelector('.catalog-editorial-card__title') : card.querySelector('h3'))?.textContent?.trim(),
                 priceText: btn.dataset.productPrice || (isEditorial ? card.querySelector('.catalog-editorial-card__price') : card.querySelector('.catalog-card__body p'))?.textContent?.trim(),
-                image: btn.dataset.productImage || card.querySelector('img')?.src,
+                image: (btn.dataset.productImage || card.querySelector('img[data-product-main]')?.getAttribute('src') || card.querySelector('img')?.getAttribute('src') || '').replace(/ /g, '-'),
                 url: btn.dataset.productUrl || card.getAttribute('href')
             };
 

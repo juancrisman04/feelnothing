@@ -3,9 +3,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   galleries.forEach((gallery) => {
     const stage = gallery.querySelector('[data-product-stage]');
+    const thumbsContainer = gallery.querySelector('.product-detail-thumbs');
     const thumbs = gallery.querySelectorAll('[data-product-thumb]');
     
-    if (!stage || thumbs.length === 0) return;
+    if (!stage || !thumbsContainer || thumbs.length === 0) return;
+
+    // Crear e inyectar el indicador deslizante
+    let indicator = thumbsContainer.querySelector('.product-detail-thumb-indicator');
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.className = 'product-detail-thumb-indicator';
+      thumbsContainer.appendChild(indicator);
+    }
+
+    // Función para posicionar el indicador
+    function updateIndicator(index) {
+      const activeThumb = thumbs[index];
+      if (!activeThumb) return;
+
+      const containerRect = thumbsContainer.getBoundingClientRect();
+      const thumbRect = activeThumb.getBoundingClientRect();
+
+      indicator.style.width = `${thumbRect.width}px`;
+      indicator.style.height = `${thumbRect.height}px`;
+      indicator.style.top = `${thumbRect.top - containerRect.top + thumbsContainer.scrollTop}px`;
+      indicator.style.left = `${thumbRect.left - containerRect.left + thumbsContainer.scrollLeft}px`;
+      indicator.style.opacity = '1';
+    }
+
+    // Inicializar indicador
+    window.addEventListener('load', () => setTimeout(() => updateIndicator(0), 100));
+    window.addEventListener('resize', () => {
+      const activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('is-active'));
+      updateIndicator(activeIndex !== -1 ? activeIndex : 0);
+    });
 
     // Sincronizar clicks en miniaturas -> Scroll del stage
     thumbs.forEach((thumb, index) => {
@@ -15,17 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
           left: index * stageWidth,
           behavior: 'smooth'
         });
-        
-        // La actualización de clase se maneja en el IntersectionObserver para que sea consistente
+        // Actualizamos inmediatamente el indicador para respuesta visual rápida
+        updateActiveThumb(index);
       });
     });
 
     // Sincronizar scroll del stage -> Clase activa en miniaturas
-    // Usamos IntersectionObserver para detectar qué imagen está visible al 50% o más
     const stageImages = stage.querySelectorAll('img');
     const observerOptions = {
       root: stage,
-      threshold: 0.5
+      threshold: 0.6 // Aumentado para mayor precisión
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -45,12 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
       thumbs.forEach((thumb, i) => {
         if (i === index) {
           thumb.classList.add('is-active');
-          // Asegurarse de que la miniatura sea visible en su propio contenedor scrollable
+          // Asegurarse de que la miniatura sea visible
           thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         } else {
           thumb.classList.remove('is-active');
         }
       });
+      updateIndicator(index);
     }
   });
 

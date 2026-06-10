@@ -33,7 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
 
-  const cart = Array.isArray(readJson(CART_STORAGE_KEY, [])) ? readJson(CART_STORAGE_KEY, []) : [];
+  const rawCart = readJson(CART_STORAGE_KEY, []);
+  const cart = (Array.isArray(rawCart) ? rawCart : []).map((item) => {
+    if (item.image && (item.image.includes('imgremeras/') || item.image.includes('imgpantalones/'))) {
+      item.image = item.image.replace(/ /g, '-');
+    }
+    return item;
+  });
   const checkout = readJson(CHECKOUT_STORAGE_KEY, {});
   let customer = checkout.customer;
   const root = document.querySelector('[data-payment-root]');

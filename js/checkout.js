@@ -16,7 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const readCart = () => {
     try {
       const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      return Array.isArray(parsed) ? parsed : [];
+      if (!Array.isArray(parsed)) return [];
+
+      return parsed.map((item) => {
+        if (item.image && (item.image.includes('imgremeras/') || item.image.includes('imgpantalones/'))) {
+          item.image = item.image.replace(/ /g, '-');
+        }
+        return item;
+      });
     } catch (error) {
       return [];
     }
