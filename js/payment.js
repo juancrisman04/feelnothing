@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const rawCart = readJson(CART_STORAGE_KEY, []);
   const cart = (Array.isArray(rawCart) ? rawCart : []).map((item) => {
-    if (item.image && (item.image.includes('imgremeras/') || item.image.includes('imgpantalones/'))) {
+    if (item.image && item.image.includes('imgremeras/')) {
       item.image = item.image.replace(/ /g, '-');
     }
     return item;
@@ -120,25 +120,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const submitOrder = async (order) => {
     const submitButton = document.querySelector('[data-payment-submit]');
-    if (!submitButton) return;
+    if (!submitButton) return { ok: false, error: 'No se encontro el boton de pago.' };
     submitButton.disabled = true;
     submitButton.textContent = 'Enviando pedido...';
 
     try {
-      await fetch('/api/orders', {
+      const response = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(order)
-      }).catch(() => {});
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || 'No pudimos registrar el pedido.');
+      }
+      return result;
     } catch (error) {
       console.warn(error);
+      return { ok: false, error: error.message || 'No pudimos registrar el pedido.' };
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = 'Pagar';
     }
   };
 
+  const showPaymentMessage = (type, message) => {
+    const previous = document.querySelector('.payment-status');
+    previous?.remove();
+
+    document.querySelector('.checkout-full__footer')?.insertAdjacentHTML(
+      'beforebegin',
+      `<p class="payment-status payment-status--${type}" role="status">${escapeHtml(message)}</p>`
+    );
+  };
+
+  const showThankYou = (orderId, whatsappUrl) => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `
+        <div class="checkout-success" role="dialog" aria-modal="true" aria-labelledby="checkout-success-title">
+          <div class="checkout-success__panel">
+            <img src="img/logo.png" alt="Feel Nothing">
+            <p>Pedido ${escapeHtml(orderId)}</p>
+            <h2 id="checkout-success-title">Gracias por tu compra</h2>
+            <span>Te estamos llevando a WhatsApp para coordinar el pago.</span>
+          </div>
+        </div>
+      `
+    );
+
+    window.setTimeout(() => {
+      window.location.href = whatsappUrl;
+    }, 1800);
+  };
+
   const finishOrder = async () => {
+    const submitButton = document.querySelector('[data-payment-submit]');
+    if (submitButton?.disabled) {
+      return;
+    }
+
     const order = {
       id: `FN-${Date.now()}`,
       createdAt: new Date().toISOString(),
@@ -147,19 +188,18 @@ document.addEventListener('DOMContentLoaded', () => {
       shipping,
       total
     };
-    const customerLines = [
-      `Contacto: ${customer.email}`,
-      `Nombre: ${customer.firstName} ${customer.lastName}`,
-      `DNI: ${customer.document}`,
-      `Direccion: ${customer.address}`,
-      `CP/Ciudad: ${customer.postalCode} - ${customer.city}`,
-      `Telefono: ${customer.phone}`
-    ];
-    const message = `Hola! Quiero finalizar esta compra:\n${getOrderLines().join('\n')}\n\n${customerLines.join('\n')}\n\nEnvio: ${formatPrice(shipping)}\nTotal: ${formatPrice(total)}`;
+    const message = `Hola FEEL NOTHING, confirmo mi compra.\nPedido: ${order.id}\nTotal: ${formatPrice(total)}\nQuedo atento para coordinar el pago.`;
 
     saveOrderLocally(order);
-    await submitOrder(order);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    const result = await submitOrder(order);
+    if (!result.ok) {
+      showPaymentMessage('error', result.error || 'No pudimos registrar el pedido. Intentalo de nuevo.');
+      return;
+    }
+
+    localStorage.removeItem(CART_STORAGE_KEY);
+    localStorage.removeItem(CHECKOUT_STORAGE_KEY);
+    showThankYou(result.orderId || order.id, `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`);
   };
 
   renderItems();

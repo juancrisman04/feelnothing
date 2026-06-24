@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'feelnothing-cart';
   const CHECKOUT_STORAGE_KEY = 'feelnothing-checkout';
-  const ORDER_STORAGE_KEY = 'feelnothing-orders';
-  const WHATSAPP_NUMBER = '5493413045521';
-  const NOTIFY_EMAIL = 'juancrisman04@gmail.com';
   const FUNES_POSTAL_CODES = new Set(['2132']);
 
   const currencyFormatter = new Intl.NumberFormat('es-AR', {
@@ -19,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!Array.isArray(parsed)) return [];
 
       return parsed.map((item) => {
-        if (item.image && (item.image.includes('imgremeras/') || item.image.includes('imgpantalones/'))) {
+        if (item.image && item.image.includes('imgremeras/')) {
           item.image = item.image.replace(/ /g, '-');
         }
         return item;
@@ -27,6 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       return [];
     }
+  };
+
+  const readCheckout = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(CHECKOUT_STORAGE_KEY) || '{}');
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (error) {
+      return {};
+    }
+  };
+
+  const writeCheckout = (data) => {
+    localStorage.setItem(CHECKOUT_STORAGE_KEY, JSON.stringify(data));
   };
 
   const escapeHtml = (value) =>
@@ -44,27 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const getShippingCost = (postalCode) => (FUNES_POSTAL_CODES.has(normalizePostalCode(postalCode)) ? 2000 : 5000);
 
   const cart = readCart();
-  const readCheckout = () => {
-    try {
-      const parsed = JSON.parse(localStorage.getItem(CHECKOUT_STORAGE_KEY) || '{}');
-      return parsed && typeof parsed === 'object' ? parsed : {};
-    } catch (error) {
-      return {};
-    }
-  };
-
-  const writeCheckout = (data) => {
-    localStorage.setItem(CHECKOUT_STORAGE_KEY, JSON.stringify(data));
-  };
-
   const savedCheckout = readCheckout();
   const state = {
-    step: 'info',
     shippingCost: savedCheckout.shippingCost ?? null,
     postalCode: savedCheckout.postalCode || savedCheckout.customer?.postalCode || '',
     customer: savedCheckout.customer || null
   };
 
+  const root = document.querySelector('[data-checkout-root]');
   const itemsNode = document.querySelector('[data-checkout-items]');
   const countNode = document.querySelector('[data-checkout-count]');
   const subtotalNode = document.querySelector('[data-checkout-subtotal]');
@@ -78,11 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const shippingMessage = document.querySelector('[data-shipping-message]');
   const summaryToggle = document.querySelector('[data-summary-toggle]');
   const summaryContent = document.querySelector('[data-summary-content]');
-  const reviewNode = document.querySelector('[data-checkout-review]');
   const primaryButton = document.querySelector('[data-checkout-primary]');
 
   if (!cart.length) {
-    document.querySelector('[data-checkout-root]').innerHTML = `
+    root.innerHTML = `
       <div class="checkout-empty">
         <img src="img/logo.png" alt="Feel Nothing">
         <h1>Tu carrito esta vacio</h1>
@@ -91,28 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     return;
   }
-
-  const prefillCheckoutForm = () => {
-    if (!state.customer || !checkoutForm) {
-      return;
-    }
-
-    Object.entries(state.customer).forEach(([key, value]) => {
-      const field = checkoutForm.elements[key];
-      if (!field || typeof value === 'boolean') {
-        return;
-      }
-      field.value = value || '';
-    });
-
-    if (checkoutForm.elements.newsletter) {
-      checkoutForm.elements.newsletter.checked = Boolean(state.customer.newsletter);
-    }
-
-    if (state.postalCode) {
-      updateShippingFromPostal(state.postalCode);
-    }
-  };
 
   const renderItems = () => {
     itemsNode.innerHTML = cart
@@ -137,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderTotals = () => {
     const subtotal = getSubtotal(cart);
     const total = subtotal + (state.shippingCost || 0);
+
     countNode.textContent = `${getCount(cart)} articulos`;
     subtotalNode.textContent = formatPrice(subtotal);
     shippingNode.textContent = state.shippingCost === null ? 'Calculado en el siguiente paso' : formatPrice(state.shippingCost);
@@ -144,81 +119,148 @@ document.addEventListener('DOMContentLoaded', () => {
     grandTotalNode.textContent = formatPrice(total);
   };
 
-  const setStep = (step) => {
-    state.step = step;
-    document.querySelectorAll('[data-step-label]').forEach((label) => {
-      const isInfoStep = step === 'info' || step === 'shipping';
-      const isActive = label.dataset.stepLabel === step || (label.dataset.stepLabel === 'info' && isInfoStep);
-      label.classList.toggle('is-active', isActive);
-    });
-  };
-
   const updateShippingFromPostal = (postalCode) => {
     const normalized = normalizePostalCode(postalCode);
     if (!normalized) {
       state.shippingCost = null;
       state.postalCode = '';
-      shippingMessage.textContent = 'Ingresa tu codigo postal para calcular el envio.';
+      if (shippingMessage) shippingMessage.textContent = 'Ingresa tu codigo postal para calcular el envio.';
       renderTotals();
       return;
     }
 
     state.postalCode = normalized;
     state.shippingCost = getShippingCost(normalized);
-    shippingInput.value = normalized;
-    if (formPostalInput && formPostalInput.value !== normalized) {
-      formPostalInput.value = normalized;
+    if (shippingInput) shippingInput.value = normalized;
+    if (formPostalInput && formPostalInput.value !== normalized) formPostalInput.value = normalized;
+    if (shippingMessage) {
+      shippingMessage.textContent = FUNES_POSTAL_CODES.has(normalized)
+        ? 'Envio a Funes: $2.000'
+        : 'Envio a Rosario u otra zona: $5.000';
     }
-    shippingMessage.textContent = FUNES_POSTAL_CODES.has(normalized)
-      ? 'Envio a Funes: $2.000'
-      : 'Envio a Rosario u otra zona: $5.000';
     renderTotals();
+  };
+
+  const prefillCheckoutForm = () => {
+    if (!state.customer || !checkoutForm) return;
+
+    Object.entries(state.customer).forEach(([key, value]) => {
+      const field = checkoutForm.elements[key];
+      if (field && typeof value !== 'boolean') field.value = value || '';
+    });
+
+    if (state.postalCode) updateShippingFromPostal(state.postalCode);
+  };
+
+  const lettersPattern = /^[A-Za-z\u00C0-\u00FF\u00D1\u00F1\s']{2,}$/;
+  const fieldRules = {
+    email: {
+      test: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      message: 'Ingresa un correo valido.'
+    },
+    firstName: {
+      test: (value) => lettersPattern.test(value),
+      message: 'El nombre solo puede tener letras.'
+    },
+    lastName: {
+      test: (value) => lettersPattern.test(value),
+      message: 'El apellido solo puede tener letras.'
+    },
+    document: {
+      test: (value) => /^\d{7,8}$/.test(value),
+      message: 'Ingresa un DNI valido, solo numeros.'
+    },
+    address: {
+      test: (value) => value.length >= 4,
+      message: 'Ingresa una direccion completa.'
+    },
+    postalCode: {
+      test: (value) => /^\d{4,8}$/.test(value),
+      message: 'El codigo postal solo puede tener numeros.'
+    },
+    city: {
+      test: (value) => lettersPattern.test(value),
+      message: 'La ciudad solo puede tener letras.'
+    },
+    phone: {
+      test: (value) => /^\d{10}$/.test(value),
+      message: 'Ingresa 10 numeros, sin 0 ni 15.'
+    }
+  };
+
+  const inputSanitizers = {
+    firstName: (value) => value.replace(/[^A-Za-z\u00C0-\u00FF\u00D1\u00F1\s']/g, ''),
+    lastName: (value) => value.replace(/[^A-Za-z\u00C0-\u00FF\u00D1\u00F1\s']/g, ''),
+    city: (value) => value.replace(/[^A-Za-z\u00C0-\u00FF\u00D1\u00F1\s']/g, ''),
+    document: (value) => value.replace(/\D/g, '').slice(0, 8),
+    postalCode: (value) => value.replace(/\D/g, '').slice(0, 8),
+    phone: (value) => value.replace(/\D/g, '').slice(0, 10)
+  };
+
+  const clearFieldError = (input) => {
+    const container = input.closest('.checkout-full__phone-group') || input;
+    container.classList.remove('is-invalid');
+
+    const errorNode = container.nextElementSibling;
+    if (errorNode?.classList.contains('checkout-field-error')) errorNode.remove();
+  };
+
+  const showFieldError = (input, message) => {
+    clearFieldError(input);
+    const container = input.closest('.checkout-full__phone-group') || input;
+    const error = document.createElement('div');
+
+    error.className = 'checkout-field-error';
+    error.textContent = message;
+    container.classList.add('is-invalid');
+    container.after(error);
+  };
+
+  const validateField = (input) => {
+    const value = input.value.trim();
+    const rule = fieldRules[input.name];
+
+    if (!input.required && !value) {
+      clearFieldError(input);
+      return true;
+    }
+
+    if (!value) {
+      showFieldError(input, 'Este dato es obligatorio.');
+      return false;
+    }
+
+    if (rule && !rule.test(value)) {
+      showFieldError(input, rule.message);
+      return false;
+    }
+
+    clearFieldError(input);
+    return true;
   };
 
   const validateForm = () => {
     let isValid = true;
     const inputs = checkoutForm.querySelectorAll('input[required]');
-    
-    // Clear previous errors
-    checkoutForm.querySelectorAll('.checkout-field-error').forEach(el => el.remove());
-    checkoutForm.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
 
-    inputs.forEach(input => {
-      const value = input.value.trim();
-      let fieldValid = true;
+    checkoutForm.querySelectorAll('.checkout-field-error').forEach((el) => el.remove());
+    checkoutForm.querySelectorAll('.is-invalid').forEach((el) => el.classList.remove('is-invalid'));
 
-      if (!value) {
-        fieldValid = false;
-      } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        fieldValid = false;
-      } else if (input.name === 'document' && !/^\d{8}$/.test(value)) {
-        fieldValid = false;
-      } else if (input.name === 'phone' && !/^\d{10}$/.test(value)) {
-        fieldValid = false;
-      }
-
-      if (!fieldValid) {
-        isValid = false;
-        const error = document.createElement('div');
-        error.className = 'checkout-field-error';
-        error.textContent = 'Ingrese este dato para continuar';
-        
-        const container = input.closest('.checkout-full__phone-group') || input;
-        container.classList.add('is-invalid');
-        container.after(error);
-      }
+    inputs.forEach((input) => {
+      if (!validateField(input)) isValid = false;
     });
+
+    if (!isValid) {
+      checkoutForm.querySelector('.is-invalid')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
     return isValid;
   };
 
   const collectCustomer = () => {
-    if (!validateForm()) {
-      return false;
-    }
+    if (!validateForm()) return false;
 
     const formData = new FormData(checkoutForm);
-    const phoneValue = formData.get('phone')?.trim();
     state.customer = {
       email: formData.get('email')?.trim(),
       firstName: formData.get('firstName')?.trim(),
@@ -227,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
       address: formData.get('address')?.trim(),
       postalCode: formData.get('postalCode')?.trim(),
       city: formData.get('city')?.trim(),
-      phone: phoneValue
+      phone: formData.get('phone')?.trim()
     };
 
     updateShippingFromPostal(state.customer.postalCode);
@@ -239,114 +281,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   };
 
-  const renderReview = () => {
-    const customer = state.customer;
-    checkoutForm.hidden = true;
-    reviewNode.hidden = false;
-    reviewNode.innerHTML = `
-      <div class="checkout-review-row">
-        <span>Contacto</span>
-        <strong>${escapeHtml(customer.email)}</strong>
-        <button type="button" data-edit-checkout>Cambiar</button>
-      </div>
-      <div class="checkout-review-row">
-        <span>Enviar a</span>
-        <strong>${escapeHtml(customer.address)}, ${escapeHtml(customer.postalCode)} ${escapeHtml(customer.city)}</strong>
-        <button type="button" data-edit-checkout>Cambiar</button>
-      </div>
-    `;
-
-    reviewNode.querySelectorAll('[data-edit-checkout]').forEach((button) => {
-      button.addEventListener('click', () => {
-        checkoutForm.hidden = false;
-        reviewNode.hidden = true;
-        primaryButton.textContent = 'Continuar con el pago';
-        setStep('info');
-      });
-    });
-
-    primaryButton.textContent = 'Pagar';
-    setStep('shipping');
-  };
-
-  const getOrderLines = () =>
-    cart.map((item) => `- ${item.title} | Talle ${item.size} x${item.quantity} (${formatPrice(item.price * item.quantity)})`);
-
-  const saveOrderLocally = (order) => {
-    try {
-      const orders = JSON.parse(localStorage.getItem(ORDER_STORAGE_KEY) || '[]');
-      const safeOrders = Array.isArray(orders) ? orders : [];
-      safeOrders.unshift(order);
-      localStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(safeOrders.slice(0, 20)));
-    } catch (error) {
-      localStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify([order]));
-    }
-  };
-
-  const notifyOrderByEmail = async (order) => {
-    const body = new FormData();
-    body.append('_subject', `Nueva compra Feel Nothing - ${order.id}`);
-    body.append('pedido', order.id);
-    body.append('cliente', `${order.customer.firstName} ${order.customer.lastName}`);
-    body.append('email', order.customer.email);
-    body.append('telefono', order.customer.phone);
-    body.append('direccion', order.customer.address);
-    body.append('codigo_postal', order.customer.postalCode);
-    body.append('envio', formatPrice(order.shipping));
-    body.append('total', formatPrice(order.total));
-    body.append('productos', getOrderLines().join('\n'));
-
-    try {
-      await fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
-        method: 'POST',
-        body,
-        headers: { Accept: 'application/json' }
-      });
-    } catch (error) {
-      // WhatsApp remains the final handoff if email delivery is unavailable.
-    }
-  };
-
-  const finishOrder = () => {
-    if (!state.customer) {
-      return;
-    }
-
-    const shipping = state.shippingCost ?? getShippingCost(state.customer.postalCode);
-    const total = getSubtotal(cart) + shipping;
-    const order = {
-      id: `FN-${Date.now()}`,
-      createdAt: new Date().toISOString(),
-      customer: state.customer,
-      items: cart,
-      shipping,
-      total
-    };
-    const customerLines = [
-      `Contacto: ${state.customer.email}`,
-      `Nombre: ${state.customer.firstName} ${state.customer.lastName}`,
-      `DNI: ${state.customer.document}`,
-      `Direccion: ${state.customer.address}`,
-      `CP/Ciudad: ${state.customer.postalCode} - ${state.customer.city}`,
-      `Telefono: ${state.customer.phone}`
-    ];
-    const message = `Hola! Quiero finalizar esta compra:\n${getOrderLines().join('\n')}\n\n${customerLines.join('\n')}\n\nEnvio: ${formatPrice(shipping)}\nTotal: ${formatPrice(total)}`;
-
-    saveOrderLocally(order);
-    notifyOrderByEmail(order);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
-  };
-
   renderItems();
   renderTotals();
   prefillCheckoutForm();
 
   summaryToggle?.addEventListener('click', () => {
     summaryContent.classList.toggle('is-open');
-    const isOpen = summaryContent.classList.contains('is-open');
-    summaryToggle.setAttribute('aria-expanded', isOpen);
+    summaryToggle.setAttribute('aria-expanded', summaryContent.classList.contains('is-open'));
   });
-
 
   shippingForm?.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -357,23 +299,32 @@ document.addEventListener('DOMContentLoaded', () => {
     updateShippingFromPostal(event.target.value);
   });
 
+  checkoutForm?.querySelectorAll('input').forEach((input) => {
+    input.addEventListener('input', () => {
+      const sanitizer = inputSanitizers[input.name];
+      if (sanitizer) {
+        const nextValue = sanitizer(input.value);
+        if (nextValue !== input.value) input.value = nextValue;
+      }
+
+      if (input.classList.contains('is-invalid') || input.closest('.checkout-full__phone-group')?.classList.contains('is-invalid')) {
+        validateField(input);
+      }
+    });
+
+    input.addEventListener('blur', () => {
+      if (input.required || input.value.trim()) validateField(input);
+    });
+  });
+
   document.querySelectorAll('[data-checkout-login]').forEach((button) => {
     button.addEventListener('click', () => {
       const email = window.prompt(`Ingresa tu correo para continuar con ${button.dataset.checkoutLogin}:`, '');
-      if (email) {
-        checkoutForm.querySelector('input[name="email"]').value = email.trim();
-      }
+      if (email) checkoutForm.querySelector('input[name="email"]').value = email.trim();
     });
   });
 
   primaryButton?.addEventListener('click', () => {
-    if (state.step === 'info') {
-      if (collectCustomer()) {
-        window.location.href = 'payment.html';
-      }
-      return;
-    }
-
-    finishOrder();
+    if (collectCustomer()) window.location.href = 'payment.html';
   });
 });

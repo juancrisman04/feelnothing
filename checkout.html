@@ -80,16 +80,16 @@
             <h2>Direccion de envio</h2>
             <div class="checkout-full__row">
               <div class="checkout-field-group">
-                <input type="text" name="firstName" placeholder="Nombre" autocomplete="given-name" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras">
+                <input type="text" name="firstName" placeholder="Nombre" autocomplete="given-name" required pattern="[A-Za-z\s]+" title="Solo letras">
               </div>
             </div>
             <div class="checkout-full__row">
               <div class="checkout-field-group">
-                <input type="text" name="lastName" placeholder="Apellidos" autocomplete="family-name" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras">
+                <input type="text" name="lastName" placeholder="Apellidos" autocomplete="family-name" required pattern="[A-Za-z\s]+" title="Solo letras">
               </div>
             </div>
             <div class="checkout-field-group">
-              <input type="text" name="document" placeholder="DNI (8 dígitos)" required pattern="\d{8}" title="Debe tener exactamente 8 números" inputmode="numeric">
+              <input type="text" name="document" placeholder="DNI (8 digitos)" required pattern="\d{7,8}" title="Debe tener 7 u 8 numeros" inputmode="numeric">
             </div>
             <div class="checkout-field-group">
               <input type="text" name="address" placeholder="Direccion" autocomplete="street-address" required>
@@ -105,13 +105,12 @@
             <div class="checkout-field-group">
               <div class="checkout-full__phone-group">
                 <span class="checkout-full__phone-prefix">+54</span>
-                <input type="tel" name="phone" placeholder="Teléfono (10 dígitos sin el 0 ni el 15)" autocomplete="tel" required pattern="\d{10}" title="Debe tener 10 números (ej: 1122334455)" inputmode="tel">
+                <input type="tel" name="phone" placeholder="Telefono (10 digitos sin el 0 ni el 15)" autocomplete="tel" required pattern="\d{10}" title="Debe tener 10 numeros (ej: 1122334455)" inputmode="tel">
               </div>
             </div>
           </div>
         </form>
 
-        <section class="checkout-full__review" data-checkout-review hidden></section>
       </section>
 
       <footer class="checkout-full__footer">

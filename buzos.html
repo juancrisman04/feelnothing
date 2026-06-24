@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Buzos | Feel Nothing</title>
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/tailwind.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -112,10 +111,12 @@
 
     <section class="grid grid-cols-2 lg:grid-cols-4 gap-4" data-catalog-grid>
       <article class="group catalog-card">
-        <div class="catalog-card__media relative overflow-hidden">
-        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-          <img src="img/bermudas.png" alt="Hoodie marrón" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
-          <img src="img/bermudas.png" alt="Hoodie marrón vista alternativa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <div class="relative">
+          <div class="catalog-card__media">
+            <img src="img/bermudas.png" alt="Hoodie marrón" class="w-full h-full object-cover" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
+            <img src="img/bermudas.png" alt="Hoodie marrón vista alternativa" class="w-full h-full object-cover">
+          </div>
+          <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
         </div>
         <div class="catalog-card__body">
           <h3 class="text-base font-semibold leading-tight text-black">Hoodie marrón</h3>
@@ -124,10 +125,12 @@
       </article>
 
       <article class="group catalog-card">
-        <div class="catalog-card__media relative overflow-hidden">
-        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-          <img src="img/bermudas.png" alt="Hoodie negro" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
-          <img src="img/bermudas.png" alt="Hoodie negro vista alternativa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <div class="relative">
+          <div class="catalog-card__media">
+            <img src="img/bermudas.png" alt="Hoodie negro" class="w-full h-full object-cover" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
+            <img src="img/bermudas.png" alt="Hoodie negro vista alternativa" class="w-full h-full object-cover">
+          </div>
+          <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
         </div>
         <div class="catalog-card__body">
           <h3 class="text-base font-semibold leading-tight text-black">Hoodie negro</h3>
@@ -135,14 +138,47 @@
         </div>
       </article>
 
-      <article class="group catalog-card">
-        <div class="catalog-card__media relative overflow-hidden">
-        <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-          <img src="img/bermudas.png" alt="Hoodie beige" class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
-          <img src="img/bermudas.png" alt="Hoodie beige vista alternativa" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+      <a href="polo-verde.html" class="group catalog-card">
+        <div class="relative">
+          <div class="catalog-card__media">
+            <img src="imgbuzos/polo verde 1.png" alt="Polo verde" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/polo verde 1.png" data-img-lifestyle="imgbuzos/polo verde 3.png">
+            <img src="imgbuzos/polo verde 2.png" alt="Polo verde vista 2" class="w-full h-full object-cover">
+            <img src="imgbuzos/polo verde 3.png" alt="Polo verde vista 3" class="w-full h-full object-cover">
+            <img src="imgbuzos/polo verde 4.png" alt="Polo verde vista 4" class="w-full h-full object-cover">
+            <img src="imgbuzos/polo verde 5.png" alt="Polo verde vista 5" class="w-full h-full object-cover">
+          </div>
+          <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
         </div>
         <div class="catalog-card__body">
-          <h3 class="text-base font-semibold leading-tight text-black">Hoodie beige</h3>
+          <h3 class="text-base font-semibold leading-tight text-black">Polo verde</h3>
+          <p class="mt-2 text-base font-bold text-black">Soon</p>
+        </div>
+      </a>
+
+      <article class="group catalog-card">
+        <div class="relative">
+          <div class="catalog-card__media">
+            <img src="img/bermudas.png" alt="Hoodie gris" class="w-full h-full object-cover" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
+            <img src="img/bermudas.png" alt="Hoodie gris vista alternativa" class="w-full h-full object-cover">
+          </div>
+          <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+        </div>
+        <div class="catalog-card__body">
+          <h3 class="text-base font-semibold leading-tight text-black">Hoodie gris</h3>
+          <p class="mt-2 text-base font-bold text-black">Soon</p>
+        </div>
+      </article>
+
+      <article class="group catalog-card">
+        <div class="relative">
+          <div class="catalog-card__media">
+            <img src="img/bermudas.png" alt="Hoodie blanco" class="w-full h-full object-cover" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
+            <img src="img/bermudas.png" alt="Hoodie blanco vista alternativa" class="w-full h-full object-cover">
+          </div>
+          <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+        </div>
+        <div class="catalog-card__body">
+          <h3 class="text-base font-semibold leading-tight text-black">Hoodie blanco</h3>
           <p class="mt-2 text-base font-bold text-black">Soon</p>
         </div>
       </article>

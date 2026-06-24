@@ -30,6 +30,9 @@ const PORT = Number(process.env.PORT || 3000);
 const OWNER_EMAIL = process.env.OWNER_EMAIL || 'juancrisman04@gmail.com';
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 const FROM_EMAIL = process.env.FROM_EMAIL || 'Feel Nothing <onboarding@resend.dev>';
+const SUPABASE_URL = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const SUPABASE_ORDERS_TABLE = process.env.SUPABASE_ORDERS_TABLE || 'orders';
 const PUBLIC_DIR = __dirname;
 const DATA_DIR = path.join(__dirname, 'data');
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
@@ -114,6 +117,38 @@ const writeOrder = async (order) => {
   await fs.writeFile(ORDERS_FILE, `${JSON.stringify(orders, null, 2)}\n`, 'utf8');
 };
 
+const insertOrderInSupabase = async (order) => {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+    return { skipped: true, reason: 'Missing Supabase credentials' };
+  }
+
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_ORDERS_TABLE}`, {
+    method: 'POST',
+    headers: {
+      apikey: SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation'
+    },
+    body: JSON.stringify({
+      order_id: order.id,
+      created_at: order.createdAt,
+      customer: order.customer,
+      items: order.items,
+      shipping: order.shipping,
+      total: order.total,
+      source: order.source
+    })
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Supabase failed: ${response.status} ${text}`);
+  }
+
+  return response.json();
+};
+
 const getOrderLines = (order) =>
   order.items.map((item) => `${item.quantity} x ${item.title} | Talle ${item.size} | ${formatPrice(item.price * item.quantity)}`);
 
@@ -149,12 +184,6 @@ const customerEmailHtml = (order) => `
     <p>Hola ${escapeHtml(order.customer.firstName)}, recibimos tu pedido y ya quedo listo para coordinar por WhatsApp.</p>
     <p><strong>Pedido:</strong> ${escapeHtml(order.id)}</p>
     <p><strong>Total:</strong> ${formatPrice(order.total)}</p>
-    <h3>Tu compra</h3>
-    <ul>
-      ${order.items
-        .map((item) => `<li>${escapeHtml(item.quantity)} x ${escapeHtml(item.title)} - Talle ${escapeHtml(item.size)}</li>`)
-        .join('')}
-    </ul>
     <p>Gracias por confiar en nosotros.</p>
   </div>
 `;
@@ -191,12 +220,50 @@ const validateOrder = (order) => {
     return 'Pedido invalido.';
   }
 
-  if (!order.customer?.email || !order.customer?.firstName || !order.customer?.phone || !order.customer?.address) {
+  const customer = order.customer || {};
+  const requiredCustomerFields = ['email', 'firstName', 'lastName', 'document', 'address', 'postalCode', 'city', 'phone'];
+  const hasMissingCustomerField = requiredCustomerFields.some((field) => !String(customer[field] || '').trim());
+
+  if (hasMissingCustomerField) {
     return 'Faltan datos obligatorios del cliente.';
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email)) {
+    return 'El correo del cliente no es valido.';
+  }
+
+  if (!/^[A-Za-zÀ-ÿÑñ\s']{2,}$/.test(customer.firstName) || !/^[A-Za-zÀ-ÿÑñ\s']{2,}$/.test(customer.lastName)) {
+    return 'Nombre y apellido solo pueden contener letras.';
+  }
+
+  if (!/^\d{7,8}$/.test(String(customer.document))) {
+    return 'El DNI debe tener 7 u 8 numeros.';
+  }
+
+  if (!/^\d{4,8}$/.test(String(customer.postalCode))) {
+    return 'El codigo postal no es valido.';
+  }
+
+  if (!/^[A-Za-zÀ-ÿÑñ\s']{2,}$/.test(customer.city)) {
+    return 'La ciudad solo puede contener letras.';
+  }
+
+  if (!/^\d{10}$/.test(String(customer.phone))) {
+    return 'El telefono debe tener 10 numeros.';
   }
 
   if (!Array.isArray(order.items) || order.items.length === 0) {
     return 'El pedido no tiene productos.';
+  }
+
+  const hasInvalidItems = order.items.some((item) => {
+    const price = Number(item.price);
+    const quantity = Number(item.quantity);
+    return !item.title || !item.size || !Number.isFinite(price) || price <= 0 || !Number.isInteger(quantity) || quantity <= 0;
+  });
+
+  if (hasInvalidItems) {
+    return 'Hay productos invalidos en el pedido.';
   }
 
   return '';
@@ -220,6 +287,7 @@ const handleOrder = async (req, res) => {
       source: 'web-checkout'
     };
 
+    const supabaseResult = await insertOrderInSupabase(order);
     await writeOrder(order);
 
     const emailResults = await Promise.allSettled([
@@ -238,6 +306,10 @@ const handleOrder = async (req, res) => {
     sendJson(res, 201, {
       ok: true,
       orderId: order.id,
+      supabase: {
+        ok: true,
+        detail: supabaseResult
+      },
       emails: emailResults.map((result) => ({
         ok: result.status === 'fulfilled',
         detail: result.status === 'fulfilled' ? result.value : result.reason.message
