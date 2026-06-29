@@ -15,44 +15,67 @@ document.addEventListener('DOMContentLoaded', () => {
       thumbsContainer.appendChild(indicator);
     }
 
+    let clickedThumbIndex = null;
+    let clickedThumbTimer = null;
+
     function updateIndicator(index) {
       const activeThumb = thumbs[index];
       if (!activeThumb) return;
 
-      const containerRect = thumbsContainer.getBoundingClientRect();
-      const thumbRect = activeThumb.getBoundingClientRect();
-
-      indicator.style.width = `${thumbRect.width}px`;
-      indicator.style.height = `${thumbRect.height}px`;
-      indicator.style.top = `${thumbRect.top - containerRect.top + thumbsContainer.scrollTop}px`;
-      indicator.style.left = `${thumbRect.left - containerRect.left + thumbsContainer.scrollLeft}px`;
+      indicator.style.width = `${activeThumb.offsetWidth}px`;
+      indicator.style.height = `${activeThumb.offsetHeight}px`;
+      indicator.style.transform = `translate3d(${activeThumb.offsetLeft}px, ${activeThumb.offsetTop}px, 0)`;
       indicator.style.opacity = '1';
     }
 
-    window.addEventListener('load', () => setTimeout(() => updateIndicator(0), 100));
-    window.addEventListener('resize', () => {
+    function getActiveIndex() {
       const activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('is-active'));
-      updateIndicator(activeIndex !== -1 ? activeIndex : 0);
-    });
+      return activeIndex !== -1 ? activeIndex : 0;
+    }
+
+    function syncIndicator() {
+      window.requestAnimationFrame(() => updateIndicator(getActiveIndex()));
+    }
+
+    function releaseClickedThumb() {
+      clearTimeout(clickedThumbTimer);
+      clickedThumbTimer = setTimeout(() => {
+        clickedThumbIndex = null;
+      }, 140);
+    }
+
+    window.addEventListener('load', () => setTimeout(() => updateIndicator(0), 100));
+    window.addEventListener('resize', syncIndicator);
+    stage.addEventListener('scroll', () => {
+      if (clickedThumbIndex !== null) releaseClickedThumb();
+    }, { passive: true });
+
+    const stageImages = stage.querySelectorAll('img');
 
     thumbs.forEach((thumb, index) => {
       thumb.addEventListener('click', () => {
         const stageWidth = stage.offsetWidth;
+        const stageGap = parseFloat(window.getComputedStyle(stage).columnGap) || 0;
+
+        clickedThumbIndex = index;
+        releaseClickedThumb();
+
         stage.scrollTo({
-          left: index * stageWidth,
+          left: index * (stageWidth + stageGap),
           behavior: 'smooth'
         });
         updateActiveThumb(index);
       });
     });
 
-    const stageImages = stage.querySelectorAll('img');
     const observerOptions = {
       root: stage,
       threshold: 0.6
     };
 
     const observer = new IntersectionObserver((entries) => {
+      if (clickedThumbIndex !== null) return;
+
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const index = Array.from(stageImages).indexOf(entry.target);
@@ -69,12 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
       thumbs.forEach((thumb, i) => {
         if (i === index) {
           thumb.classList.add('is-active');
-          thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+          thumb.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'nearest' });
         } else {
           thumb.classList.remove('is-active');
         }
       });
-      updateIndicator(index);
+
+      window.requestAnimationFrame(() => updateIndicator(index));
     }
   });
 

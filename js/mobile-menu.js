@@ -10,6 +10,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nav.dataset.mobileMenuReady = 'true';
 
+    menu.querySelectorAll('.mobile-menu-panel__group').forEach((group) => {
+      const summary = group.querySelector('.mobile-menu-panel__summary');
+      const subnav = group.querySelector('.mobile-menu-panel__subnav');
+
+      if (!summary || !subnav) return;
+
+      const setSubnavHeight = (height) => {
+        subnav.style.height = `${height}px`;
+      };
+
+      if (group.open) {
+        group.classList.add('is-open');
+        summary.setAttribute('aria-expanded', 'true');
+        subnav.style.height = 'auto';
+      } else {
+        summary.setAttribute('aria-expanded', 'false');
+        setSubnavHeight(0);
+      }
+
+      summary.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const isOpen = group.classList.contains('is-open');
+        subnav.style.transition = '';
+
+        if (isOpen) {
+          setSubnavHeight(subnav.scrollHeight);
+          subnav.offsetHeight;
+          group.classList.remove('is-open');
+          summary.setAttribute('aria-expanded', 'false');
+          setSubnavHeight(0);
+
+          const finishClose = (transitionEvent) => {
+            if (transitionEvent.propertyName !== 'height') return;
+            group.open = false;
+            subnav.removeEventListener('transitionend', finishClose);
+          };
+
+          subnav.addEventListener('transitionend', finishClose);
+          return;
+        }
+
+        group.open = true;
+        group.classList.add('is-open');
+        summary.setAttribute('aria-expanded', 'true');
+        setSubnavHeight(0);
+        subnav.offsetHeight;
+        setSubnavHeight(subnav.scrollHeight);
+
+        const finishOpen = (transitionEvent) => {
+          if (transitionEvent.propertyName !== 'height') return;
+          subnav.style.height = 'auto';
+          subnav.removeEventListener('transitionend', finishOpen);
+        };
+
+        subnav.addEventListener('transitionend', finishOpen);
+      });
+    });
+
     const openMenu = () => {
       menu.classList.add('is-open');
       backdrop.classList.add('is-open');
