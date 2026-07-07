@@ -189,17 +189,17 @@ document.addEventListener('DOMContentLoaded', () => {
       total
     };
     const message = `Hola FEEL NOTHING, confirmo mi compra.\nPedido: ${order.id}\nTotal: ${formatPrice(total)}\nQuedo atento para coordinar el pago.`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
 
     saveOrderLocally(order);
     const result = await submitOrder(order);
     if (!result.ok) {
-      showPaymentMessage('error', result.error || 'No pudimos registrar el pedido. Intentalo de nuevo.');
-      return;
+      console.warn('No se pudo registrar el pedido en el servidor, se continua por WhatsApp.', result.error);
     }
 
     localStorage.removeItem(CART_STORAGE_KEY);
     localStorage.removeItem(CHECKOUT_STORAGE_KEY);
-    showThankYou(result.orderId || order.id, `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`);
+    showThankYou(result.orderId || order.id, whatsappUrl);
   };
 
   renderItems();
