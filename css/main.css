@@ -1213,12 +1213,16 @@ body.light-theme .brand-footer {
 }
 
 .remeras-catalog-page .catalog-card__media > img[src$="-1.png"],
+.remeras-catalog-page .catalog-card__media > img[src$="-2.png"],
+.remeras-catalog-page .catalog-card__media > img[src$="-1.png"],
 .remeras-catalog-page .catalog-card__media > img[src$="-2.png"] {
   box-sizing: border-box;
   object-fit: contain;
   padding: 8%;
 }
 
+.buzos-catalog-page .catalog-card__media > img[src$=" 1.png"],
+.buzos-catalog-page .catalog-card__media > img[src$=" 2.png"],
 .buzos-catalog-page .catalog-card__media > img[src$=" 1.png"],
 .buzos-catalog-page .catalog-card__media > img[src$=" 2.png"] {
   box-sizing: border-box;
@@ -1227,12 +1231,16 @@ body.light-theme .brand-footer {
 }
 
 .pantalones-catalog-page .catalog-card__media > img[src$=" 1.png"],
+.pantalones-catalog-page .catalog-card__media > img[src$=" 2.png"],
+.pantalones-catalog-page .catalog-card__media > img[src$=" 1.png"],
 .pantalones-catalog-page .catalog-card__media > img[src$=" 2.png"] {
   box-sizing: border-box;
   object-fit: contain;
   padding: 8%;
 }
 
+.novedades-section .catalog-card__media > img[src^="imgremeras/"][src$="-1.png"],
+.novedades-section .catalog-card__media > img[src^="imgremeras/"][src$="-2.png"],
 .novedades-section .catalog-card__media > img[src^="imgremeras/"][src$="-1.png"],
 .novedades-section .catalog-card__media > img[src^="imgremeras/"][src$="-2.png"] {
   box-sizing: border-box;
@@ -1242,6 +1250,10 @@ body.light-theme .brand-footer {
 
 .novedades-section .catalog-card__media > img[src^="imgbuzos/"][src$=" 1.png"],
 .novedades-section .catalog-card__media > img[src^="imgbuzos/"][src$=" 2.png"],
+.novedades-section .catalog-card__media > img[src^="imgbuzos/"][src$=" 1.png"],
+.novedades-section .catalog-card__media > img[src^="imgbuzos/"][src$=" 2.png"],
+.novedades-section .catalog-card__media > img[src^="imgpantalones/"][src$=" 1.png"],
+.novedades-section .catalog-card__media > img[src^="imgpantalones/"][src$=" 2.png"],
 .novedades-section .catalog-card__media > img[src^="imgpantalones/"][src$=" 1.png"],
 .novedades-section .catalog-card__media > img[src^="imgpantalones/"][src$=" 2.png"] {
   box-sizing: border-box;
@@ -1645,6 +1657,8 @@ body.light-theme .brand-footer {
 }
 
 .remera-detail-page .product-detail-thumb img[src$="-1.png"],
+.remera-detail-page .product-detail-thumb img[src$="-2.png"],
+.remera-detail-page .product-detail-thumb img[src$="-1.png"],
 .remera-detail-page .product-detail-thumb img[src$="-2.png"] {
   box-sizing: border-box;
   object-fit: contain;
@@ -1653,6 +1667,10 @@ body.light-theme .brand-footer {
 
 .product-detail-body .product-detail-thumb img[src*="imgbuzos/"][src$=" 1.png"],
 .product-detail-body .product-detail-thumb img[src*="imgbuzos/"][src$=" 2.png"],
+.product-detail-body .product-detail-thumb img[src*="imgbuzos/"][src$=" 1.png"],
+.product-detail-body .product-detail-thumb img[src*="imgbuzos/"][src$=" 2.png"],
+.product-detail-body .product-detail-thumb img[src*="imgpantalones/"][src$=" 1.png"],
+.product-detail-body .product-detail-thumb img[src*="imgpantalones/"][src$=" 2.png"],
 .product-detail-body .product-detail-thumb img[src*="imgpantalones/"][src$=" 1.png"],
 .product-detail-body .product-detail-thumb img[src*="imgpantalones/"][src$=" 2.png"] {
   box-sizing: border-box;
@@ -1699,6 +1717,8 @@ body.light-theme .brand-footer {
 }
 
 .remera-detail-page .product-detail-stage img[src$="-1.png"],
+.remera-detail-page .product-detail-stage img[src$="-2.png"],
+.remera-detail-page .product-detail-stage img[src$="-1.png"],
 .remera-detail-page .product-detail-stage img[src$="-2.png"] {
   box-sizing: border-box;
   object-fit: contain;
@@ -1707,6 +1727,10 @@ body.light-theme .brand-footer {
 
 .product-detail-body .product-detail-stage img[src*="imgbuzos/"][src$=" 1.png"],
 .product-detail-body .product-detail-stage img[src*="imgbuzos/"][src$=" 2.png"],
+.product-detail-body .product-detail-stage img[src*="imgbuzos/"][src$=" 1.png"],
+.product-detail-body .product-detail-stage img[src*="imgbuzos/"][src$=" 2.png"],
+.product-detail-body .product-detail-stage img[src*="imgpantalones/"][src$=" 1.png"],
+.product-detail-body .product-detail-stage img[src*="imgpantalones/"][src$=" 2.png"],
 .product-detail-body .product-detail-stage img[src*="imgpantalones/"][src$=" 1.png"],
 .product-detail-body .product-detail-stage img[src*="imgpantalones/"][src$=" 2.png"] {
   box-sizing: border-box;
