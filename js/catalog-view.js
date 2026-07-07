@@ -5,6 +5,8 @@ const typeTriggers = document.querySelectorAll("[data-catalog-view-type]");
 // 1. Column view logic (1 vs 2 columns)
 if (catalogGrid && viewTriggers.length) {
   const setCatalogView = (columns) => {
+    catalogGrid.dataset.catalogViewColumns = columns;
+
     if (columns === "1") {
       catalogGrid.classList.add("grid-cols-1");
       catalogGrid.classList.remove("grid-cols-2");
@@ -34,6 +36,12 @@ if (catalogGrid && viewTriggers.length) {
 
 // 2. Image type logic (Product vs Lifestyle)
 if (typeTriggers.length) {
+  const resetCatalogCardMedia = () => {
+    document.querySelectorAll(".catalog-card__media").forEach((media) => {
+      media.scrollLeft = 0;
+    });
+  };
+
   const setImageType = (type) => {
     const images = document.querySelectorAll("[data-product-main]");
     
@@ -48,9 +56,12 @@ if (typeTriggers.length) {
       }
     });
 
+    resetCatalogCardMedia();
+
     typeTriggers.forEach(trigger => {
       const isActive = trigger.dataset.catalogViewType === type;
       trigger.classList.toggle("is-active", isActive);
+      trigger.setAttribute("aria-pressed", String(isActive));
     });
   };
 
@@ -59,4 +70,9 @@ if (typeTriggers.length) {
       setImageType(trigger.dataset.catalogViewType);
     });
   });
+
+  const activeTypeTrigger =
+    document.querySelector("[data-catalog-view-type].is-active") || typeTriggers[0];
+
+  setImageType(activeTypeTrigger.dataset.catalogViewType);
 }

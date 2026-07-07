@@ -54,6 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
 
+  const normalizeCartImage = (image) => {
+    const value = String(image || '');
+    return value.includes('imgremeras/') ? value.replace(/ /g, '-') : value;
+  };
+
+  const isPhotoOne = (src) => /(?:^|[ -])1\.[a-z0-9]+(?:$|\?)/i.test(String(src || ''));
+
+  const getProductFirstImage = () => {
+    const stageImages = Array.from(document.querySelectorAll('[data-product-stage] img'));
+    const photoOne = stageImages.find((img) => isPhotoOne(img.getAttribute('src')));
+    const firstStageImage = stageImages[0]?.getAttribute('src');
+    const firstThumbImage = document.querySelector('[data-product-thumb]')?.getAttribute('data-image');
+
+    return normalizeCartImage(photoOne?.getAttribute('src') || firstStageImage || firstThumbImage || '');
+  };
+
   const ensureDrawer = () => {
     if (document.querySelector('[data-cart-drawer]')) return;
 
@@ -160,11 +176,65 @@ document.addEventListener('DOMContentLoaded', () => {
     cartShippingProgress.style.width = `${progress}%`;
   };
 
+  const scrollProductsShowcase = ({ behavior = 'smooth' } = {}) => {
+    const showcase = document.querySelector('#products .products-showcase-grid');
+    if (!showcase) return false;
+
+    const rect = showcase.getBoundingClientRect();
+    const targetTop = window.scrollY + rect.top - (window.innerHeight - rect.height) / 2;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior
+    });
+
+    return true;
+  };
+
+  const normalizePageName = (value) => {
+    const page = String(value || '').split('/').pop();
+    if (!page || page === '') return 'index.html';
+    return page;
+  };
+
+  const isSamePageProductsLink = (anchor) => {
+    const href = anchor.getAttribute('href') || '';
+    if (!href.includes('#products')) return false;
+    if (href.startsWith('#')) return true;
+
+    try {
+      const url = new URL(anchor.href, window.location.href);
+      return normalizePageName(url.pathname) === normalizePageName(window.location.pathname);
+    } catch (error) {
+      return false;
+    }
+  };
+
   const bindCloseButtons = () => {
     document.querySelectorAll('[data-cart-close]').forEach((button) => {
-      button.onclick = closeCart;
+      button.onclick = (event) => {
+        closeCart();
+
+        if (button.tagName === 'A' && isSamePageProductsLink(button)) {
+          event.preventDefault();
+          history.pushState(null, '', '#products');
+          window.requestAnimationFrame(() => scrollProductsShowcase());
+        }
+      };
     });
   };
+
+  const handleProductsHash = ({ behavior = 'auto' } = {}) => {
+    if (window.location.hash !== '#products') return;
+    window.requestAnimationFrame(() => scrollProductsShowcase({ behavior }));
+  };
+
+  window.addEventListener('load', () => handleProductsHash());
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#products') {
+      scrollProductsShowcase();
+    }
+  });
 
   const updateQuantity = (id, nextQuantity) => {
     const nextCart = readCart()
@@ -230,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p class="cart-item__title">${escapeHtml(item.title)}</p>
                       </a>
                       <p class="cart-item__price">${formatPrice(item.price)}</p>
-                      <p class="cart-item__meta">TALLA ${escapeHtml(item.size)}</p>
+                      <p class="cart-item__meta">TALLE ${escapeHtml(item.size)}</p>
                     </div>
                     <button type="button" class="cart-item__remove" data-cart-remove="${escapeHtml(item.id)}">ELIMINAR</button>
                   </div>
@@ -308,8 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const title = document.querySelector('.product-detail-title')?.textContent?.trim();
     const priceText = document.querySelector('.product-detail-price')?.textContent?.trim();
-    const imageRaw = document.querySelector('[data-product-main]')?.getAttribute('src') || '';
-    const image = imageRaw.includes('imgremeras/') ? imageRaw.replace(/ /g, '-') : imageRaw;
+    const image = getProductFirstImage();
     const size = detailAddButton.dataset.selectedSize?.trim();
 
     if (!size) {

@@ -49,6 +49,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return Number.isFinite(amount) ? amount : 0;
     };
 
+    const normalizeCartImage = (image) => {
+        const value = String(image || '');
+        return value.includes('imgremeras/') ? value.replace(/ /g, '-') : value;
+    };
+
+    const isPhotoOne = (src) => /(?:^|[ -])1\.[a-z0-9]+(?:$|\?)/i.test(String(src || ''));
+
+    const getCardFirstImage = (card) => {
+        const images = Array.from(card.querySelectorAll('img'));
+        const photoOne = images.find((img) => isPhotoOne(img.getAttribute('src')));
+        const productMain = card.querySelector('img[data-product-main]');
+
+        return normalizeCartImage(
+            photoOne?.getAttribute('src') ||
+            productMain?.dataset.imgLifestyle ||
+            productMain?.dataset.imgProduct ||
+            productMain?.getAttribute('src') ||
+            images[0]?.getAttribute('src') ||
+            ''
+        );
+    };
+
     const getProductSizes = (product) => {
         if (product.url.includes('pantalon') || product.url.includes('bermuda')) {
             return ['38', '40', '42', '44'];
@@ -118,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         openModal({
             title: btn.dataset.productTitle || card.querySelector('h3')?.textContent?.trim(),
             priceText: btn.dataset.productPrice || card.querySelector('.catalog-card__body p')?.textContent?.trim(),
-            image: btn.dataset.productImage || card.querySelector('img[data-product-main]')?.getAttribute('src') || card.querySelector('img')?.getAttribute('src') || '',
+            image: normalizeCartImage(btn.dataset.productImage) || getCardFirstImage(card),
             url: btn.dataset.productUrl || card.getAttribute('href') || ''
         });
     });

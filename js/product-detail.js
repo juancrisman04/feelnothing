@@ -103,13 +103,106 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const accordions = document.querySelectorAll('.product-detail-accordion');
+  const accordionCloseTimers = new WeakMap();
+  const accordionCloseDuration = 320;
+  const accordionHeightBuffer = 18;
+
+  const ensureAccordionContent = (accordion) => {
+    const summary = accordion.querySelector('summary');
+    if (!summary || accordion.querySelector('.product-detail-accordion__content')) return;
+
+    const content = document.createElement('div');
+    const inner = document.createElement('div');
+    content.className = 'product-detail-accordion__content';
+    inner.className = 'product-detail-accordion__inner';
+
+    Array.from(accordion.childNodes).forEach((node) => {
+      if (node !== summary) inner.appendChild(node);
+    });
+
+    content.appendChild(inner);
+    accordion.appendChild(content);
+  };
+
+  const setAccordionHeight = (accordion) => {
+    const inner = accordion.querySelector('.product-detail-accordion__inner');
+    if (!inner) return;
+
+    accordion.style.setProperty('--product-detail-accordion-height', `${inner.scrollHeight + accordionHeightBuffer}px`);
+  };
+
+  const closeAccordion = (accordion) => {
+    const summary = accordion.querySelector('summary');
+    window.clearTimeout(accordionCloseTimers.get(accordion));
+    setAccordionHeight(accordion);
+    accordion.classList.remove('is-open');
+    summary?.setAttribute('aria-expanded', 'false');
+
+    const timer = window.setTimeout(() => {
+      accordion.open = false;
+      accordionCloseTimers.delete(accordion);
+    }, accordionCloseDuration);
+
+    accordionCloseTimers.set(accordion, timer);
+  };
+
   accordions.forEach((accordion) => {
-    accordion.querySelector('summary')?.addEventListener('click', () => {
-      if (!accordion.hasAttribute('open')) {
-        accordion.classList.add('is-open');
-      } else {
-        accordion.classList.remove('is-open');
+    const summary = accordion.querySelector('summary');
+    if (!summary) return;
+
+    ensureAccordionContent(accordion);
+    accordion.classList.add('is-enhanced');
+    setAccordionHeight(accordion);
+    accordion.classList.toggle('is-open', accordion.open);
+    summary.setAttribute('aria-expanded', accordion.open ? 'true' : 'false');
+
+    summary.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      if (accordion.classList.contains('is-open')) {
+        closeAccordion(accordion);
+        return;
       }
+
+      window.clearTimeout(accordionCloseTimers.get(accordion));
+      accordion.open = true;
+      setAccordionHeight(accordion);
+      summary.setAttribute('aria-expanded', 'true');
+      window.requestAnimationFrame(() => {
+        accordion.classList.add('is-open');
+      });
     });
   });
+
+  window.addEventListener('resize', () => {
+    accordions.forEach((accordion) => {
+      if (accordion.open || accordion.classList.contains('is-open')) setAccordionHeight(accordion);
+    });
+  });
+
+  // ── Size selection logic ──
+  const sizeButtons = document.querySelectorAll('.product-detail-size');
+  const addToCartBtn = document.querySelector('.product-detail-btn--primary');
+
+  if (sizeButtons.length && addToCartBtn) {
+    // Store original label
+    addToCartBtn.dataset.defaultLabel = addToCartBtn.textContent.trim();
+
+    sizeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Toggle active state on size buttons
+        sizeButtons.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        // Store the selected size on the add-to-cart button
+        addToCartBtn.dataset.selectedSize = btn.dataset.size;
+
+        // If button was showing "SELECCIONA UN TALLE", restore it
+        if (addToCartBtn.classList.contains('is-prompt')) {
+          addToCartBtn.textContent = addToCartBtn.dataset.defaultLabel;
+          addToCartBtn.classList.remove('is-prompt');
+        }
+      });
+    });
+  }
 });

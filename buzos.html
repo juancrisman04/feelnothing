@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
-<body class="light-theme catalog-page-body antialiased selection:bg-red-600 selection:text-white">
+<body class="light-theme catalog-page-body buzos-catalog-page antialiased selection:bg-red-600 selection:text-white">
   <nav class="site-header fixed z-50 left-1/2 -translate-x-1/2 px-4">
     <div class="site-header__ticker" aria-label="Novedades de la tienda">
       <div class="site-header__ticker-marquee">
@@ -95,7 +95,7 @@
       <div class="catalog-page__controls" aria-label="Controles de vista">
         <button type="button" class="catalog-page__control" data-catalog-view-trigger="1">1</button>
         <button type="button" class="catalog-page__control is-active" data-catalog-view-trigger="2">2</button>
-        <button type="button" class="catalog-page__control" data-catalog-view-type="product" aria-label="Vista prenda">
+        <button type="button" class="catalog-page__control is-active" data-catalog-view-type="product" aria-label="Vista prenda">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10a2 2 0 002 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
           </svg>
@@ -110,129 +110,88 @@
     </section>
 
     <section class="grid grid-cols-2 lg:grid-cols-4 gap-4" data-catalog-grid>
-      <article class="group catalog-card">
-        <div class="relative">
-          <div class="catalog-card__media">
-            <img src="img/bermudas.png" alt="Hoodie marrón" class="w-full h-full object-cover" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
-            <img src="img/bermudas.png" alt="Hoodie marrón vista alternativa" class="w-full h-full object-cover">
-          </div>
-          <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-        </div>
-        <div class="catalog-card__body">
-          <h3 class="text-base font-semibold leading-tight text-black">Hoodie marrón</h3>
-          <p class="mt-2 text-base font-bold text-black">Soon</p>
-        </div>
-      </article>
-
-      <article class="group catalog-card">
-        <div class="relative">
-          <div class="catalog-card__media">
-            <img src="img/bermudas.png" alt="Hoodie negro" class="w-full h-full object-cover" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
-            <img src="img/bermudas.png" alt="Hoodie negro vista alternativa" class="w-full h-full object-cover">
-          </div>
-          <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-        </div>
-        <div class="catalog-card__body">
-          <h3 class="text-base font-semibold leading-tight text-black">Hoodie negro</h3>
-          <p class="mt-2 text-base font-bold text-black">Soon</p>
-        </div>
-      </article>
-
       <a href="buzo-unruly-scene.html" class="group catalog-card">
         <div class="relative">
           <div class="catalog-card__media">
-            <img src="imgbuzos/buzo negro 1.png" alt="buzo unruly scene" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/buzo negro 1.png" data-img-lifestyle="imgbuzos/buzo negro 3.png">
-            <img src="imgbuzos/buzo negro 2.png" alt="buzo unruly scene vista 2" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo negro 3.png" alt="buzo unruly scene vista 3" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo negro 4.png" alt="buzo unruly scene vista 4" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo negro 5.png" alt="buzo unruly scene vista 5" class="w-full h-full object-cover">
+            <img src="imgbuzos/buzo negro 1.webp" alt="buzo unruly scene" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/buzo negro 1.webp" data-img-lifestyle="imgbuzos/buzo negro 3.webp" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo negro 2.webp" alt="buzo unruly scene vista 2" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo negro 3.webp" alt="buzo unruly scene vista 3" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo negro 4.webp" alt="buzo unruly scene vista 4" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo negro 5.webp" alt="buzo unruly scene vista 5" class="w-full h-full object-cover" loading="lazy" decoding="async">
           </div>
           <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
         </div>
         <div class="catalog-card__body">
           <h3 class="text-base font-semibold leading-tight text-black">buzo unruly scene</h3>
-          <p class="mt-2 text-base font-bold text-black">Soon</p>
+          <p class="mt-2 text-base font-bold text-black">$48.500</p>
         </div>
       </a>
 
       <a href="buzo-elevated-essentials.html" class="group catalog-card">
         <div class="relative">
           <div class="catalog-card__media">
-            <img src="imgbuzos/buzo vino 1.png" alt="buzo elevated essentials" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/buzo vino 1.png" data-img-lifestyle="imgbuzos/buzo vino 3.png">
-            <img src="imgbuzos/buzo vino 2.png" alt="buzo elevated essentials vista 2" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo vino 3.png" alt="buzo elevated essentials vista 3" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo vino 4.png" alt="buzo elevated essentials vista 4" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo vino 5.png" alt="buzo elevated essentials vista 5" class="w-full h-full object-cover">
+            <img src="imgbuzos/buzo vino 1.webp" alt="buzo elevated essentials" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/buzo vino 1.webp" data-img-lifestyle="imgbuzos/buzo vino 3.webp" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo vino 2.webp" alt="buzo elevated essentials vista 2" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo vino 3.webp" alt="buzo elevated essentials vista 3" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo vino 4.webp" alt="buzo elevated essentials vista 4" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo vino 5.webp" alt="buzo elevated essentials vista 5" class="w-full h-full object-cover" loading="lazy" decoding="async">
           </div>
           <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
         </div>
         <div class="catalog-card__body">
           <h3 class="text-base font-semibold leading-tight text-black">buzo elevated essentials</h3>
-          <p class="mt-2 text-base font-bold text-black">Soon</p>
+          <p class="mt-2 text-base font-bold text-black">$48.500</p>
         </div>
       </a>
 
       <a href="buzo-feelnothingstudios.html" class="group catalog-card">
         <div class="relative">
           <div class="catalog-card__media">
-            <img src="imgbuzos/buzo beige 1.png" alt="buzo feelnothingstudios" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/buzo beige 1.png" data-img-lifestyle="imgbuzos/buzo beige 3.png">
-            <img src="imgbuzos/buzo beige 2.png" alt="buzo feelnothingstudios vista 2" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo beige 3.png" alt="buzo feelnothingstudios vista 3" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo beige 4.png" alt="buzo feelnothingstudios vista 4" class="w-full h-full object-cover">
-            <img src="imgbuzos/buzo beige 5.png" alt="buzo feelnothingstudios vista 5" class="w-full h-full object-cover">
+            <img src="imgbuzos/buzo beige 1.webp" alt="buzo feelnothingstudios" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/buzo beige 1.webp" data-img-lifestyle="imgbuzos/buzo beige 3.webp" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo beige 2.webp" alt="buzo feelnothingstudios vista 2" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo beige 3.webp" alt="buzo feelnothingstudios vista 3" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo beige 4.webp" alt="buzo feelnothingstudios vista 4" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/buzo beige 5.webp" alt="buzo feelnothingstudios vista 5" class="w-full h-full object-cover" loading="lazy" decoding="async">
           </div>
           <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
         </div>
         <div class="catalog-card__body">
           <h3 class="text-base font-semibold leading-tight text-black">buzo feelnothingstudios</h3>
-          <p class="mt-2 text-base font-bold text-black">Soon</p>
+          <p class="mt-2 text-base font-bold text-black">$48.500</p>
         </div>
       </a>
 
       <a href="polo-verde.html" class="group catalog-card">
         <div class="relative">
           <div class="catalog-card__media">
-            <img src="imgbuzos/polo verde 1.png" alt="Polo verde" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/polo verde 1.png" data-img-lifestyle="imgbuzos/polo verde 3.png">
-            <img src="imgbuzos/polo verde 2.png" alt="Polo verde vista 2" class="w-full h-full object-cover">
-            <img src="imgbuzos/polo verde 3.png" alt="Polo verde vista 3" class="w-full h-full object-cover">
-            <img src="imgbuzos/polo verde 4.png" alt="Polo verde vista 4" class="w-full h-full object-cover">
-            <img src="imgbuzos/polo verde 5.png" alt="Polo verde vista 5" class="w-full h-full object-cover">
+            <img src="imgbuzos/polo verde 1.webp" alt="Polo verde" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/polo verde 1.webp" data-img-lifestyle="imgbuzos/polo verde 3.webp" loading="lazy" decoding="async">
+            <img src="imgbuzos/polo verde 2.webp" alt="Polo verde vista 2" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/polo verde 3.webp" alt="Polo verde vista 3" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/polo verde 4.webp" alt="Polo verde vista 4" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <img src="imgbuzos/polo verde 5.webp" alt="Polo verde vista 5" class="w-full h-full object-cover" loading="lazy" decoding="async">
           </div>
           <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
         </div>
         <div class="catalog-card__body">
           <h3 class="text-base font-semibold leading-tight text-black">Polo verde</h3>
-          <p class="mt-2 text-base font-bold text-black">Soon</p>
+          <p class="mt-2 text-base font-bold text-black">$46.000</p>
         </div>
       </a>
 
-      <article class="group catalog-card">
+      <a href="polo-bordo.html" class="group catalog-card">
         <div class="relative">
           <div class="catalog-card__media">
-            <img src="img/bermudas.png" alt="Hoodie gris" class="w-full h-full object-cover" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
-            <img src="img/bermudas.png" alt="Hoodie gris vista alternativa" class="w-full h-full object-cover">
+            <img src="imgbuzos/polo rojo 1.webp" alt="Polo bordo" class="w-full h-full object-cover" data-product-main data-img-product="imgbuzos/polo rojo 1.webp" data-img-lifestyle="imgbuzos/polo rojo 2.webp" loading="lazy" decoding="async">
+            <img src="imgbuzos/polo rojo 2.webp" alt="Polo bordo vista 2" class="w-full h-full object-cover" loading="lazy" decoding="async">
           </div>
           <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
         </div>
         <div class="catalog-card__body">
-          <h3 class="text-base font-semibold leading-tight text-black">Hoodie gris</h3>
-          <p class="mt-2 text-base font-bold text-black">Soon</p>
+          <h3 class="text-base font-semibold leading-tight text-black">Polo bordo</h3>
+          <p class="mt-2 text-base font-bold text-black">$46.000</p>
         </div>
-      </article>
+      </a>
 
-      <article class="group catalog-card">
-        <div class="relative">
-          <div class="catalog-card__media">
-            <img src="img/bermudas.png" alt="Hoodie blanco" class="w-full h-full object-cover" data-product-main data-img-product="img/bermudas.png" data-img-lifestyle="img/bermudas.png">
-            <img src="img/bermudas.png" alt="Hoodie blanco vista alternativa" class="w-full h-full object-cover">
-          </div>
-          <button type="button" class="quick-add-btn" aria-label="Agregar al carrito"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-        </div>
-        <div class="catalog-card__body">
-          <h3 class="text-base font-semibold leading-tight text-black">Hoodie blanco</h3>
-          <p class="mt-2 text-base font-bold text-black">Soon</p>
-        </div>
-      </article>
     </section>
   </main>
 
