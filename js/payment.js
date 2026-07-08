@@ -177,16 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const showPaymentMessage = (type, message) => {
-    const previous = document.querySelector('.payment-status');
-    previous?.remove();
-
-    document.querySelector('.checkout-full__footer')?.insertAdjacentHTML(
-      'beforebegin',
-      `<p class="payment-status payment-status--${type}" role="status">${escapeHtml(message)}</p>`
-    );
-  };
-
   const showThankYou = (orderId, whatsappUrl) => {
     document.body.insertAdjacentHTML(
       'beforeend',
