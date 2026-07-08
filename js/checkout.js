@@ -15,12 +15,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       if (!Array.isArray(parsed)) return [];
 
-      return parsed.map((item) => {
-        if (item.image && item.image.includes('imgremeras/')) {
-          item.image = item.image.replace(/ /g, '-');
-        }
-        return item;
-      });
+      return parsed
+        .map((item) => {
+          const price = Number(item.price);
+          const quantity = Number(item.quantity);
+          return {
+            ...item,
+            id: String(item.id || `${item.title || 'item'}-${item.size || 'sin-talle'}`),
+            title: String(item.title || '').trim(),
+            size: String(item.size || '').trim(),
+            image: String(item.image || '').trim(),
+            url: String(item.url || 'index.html').trim(),
+            price,
+            quantity
+          };
+        })
+        .filter((item) => item.title && item.size && Number.isFinite(item.price) && item.price > 0 && Number.isInteger(item.quantity) && item.quantity > 0)
+        .map((item) => {
+          if (item.image && item.image.includes('imgremeras/')) {
+            item.image = item.image.replace(/ /g, '-');
+          }
+          return item;
+        });
     } catch (error) {
       return [];
     }
@@ -39,6 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem(CHECKOUT_STORAGE_KEY, JSON.stringify(data));
   };
 
+  const writeCart = (cart) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+  };
+
   const escapeHtml = (value) =>
     String(value ?? '')
       .replace(/&/g, '&amp;')
@@ -54,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const getShippingCost = (postalCode) => (FUNES_POSTAL_CODES.has(normalizePostalCode(postalCode)) ? 2000 : 5000);
 
   const cart = readCart();
+  writeCart(cart);
   const savedCheckout = readCheckout();
   const state = {
     shippingCost: savedCheckout.shippingCost ?? null,
@@ -151,6 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (state.postalCode) updateShippingFromPostal(state.postalCode);
   };
+
+  const normalizeWhitespace = (value) => String(value || '').trim().replace(/\s+/g, ' ');
 
   const lettersPattern = /^[A-Za-z\u00C0-\u00FF\u00D1\u00F1\s']{2,}$/;
   const fieldRules = {
@@ -262,14 +285,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const formData = new FormData(checkoutForm);
     state.customer = {
-      email: formData.get('email')?.trim(),
-      firstName: formData.get('firstName')?.trim(),
-      lastName: formData.get('lastName')?.trim(),
-      document: formData.get('document')?.trim(),
-      address: formData.get('address')?.trim(),
-      postalCode: formData.get('postalCode')?.trim(),
-      city: formData.get('city')?.trim(),
-      phone: formData.get('phone')?.trim()
+      email: normalizeWhitespace(formData.get('email')).toLowerCase(),
+      firstName: normalizeWhitespace(formData.get('firstName')),
+      lastName: normalizeWhitespace(formData.get('lastName')),
+      document: normalizePostalCode(formData.get('document')),
+      address: normalizeWhitespace(formData.get('address')),
+      postalCode: normalizePostalCode(formData.get('postalCode')),
+      city: normalizeWhitespace(formData.get('city')),
+      phone: normalizePostalCode(formData.get('phone')),
+      province: 'Santa Fe',
+      country: 'Argentina'
     };
 
     updateShippingFromPostal(state.customer.postalCode);

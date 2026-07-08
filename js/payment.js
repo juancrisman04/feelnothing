@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const formatPrice = (value) => currencyFormatter.format(value || 0);
   const normalizePostalCode = (value) => String(value || '').trim().replace(/\D/g, '');
   const getShippingCost = (postalCode) => (FUNES_POSTAL_CODES.has(normalizePostalCode(postalCode)) ? 2000 : 5000);
+  const normalizeWhitespace = (value) => String(value || '').trim().replace(/\s+/g, ' ');
 
   const readJson = (key, fallback) => {
     try {
@@ -34,14 +35,44 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#39;');
 
   const rawCart = readJson(CART_STORAGE_KEY, []);
-  const cart = (Array.isArray(rawCart) ? rawCart : []).map((item) => {
-    if (item.image && item.image.includes('imgremeras/')) {
-      item.image = item.image.replace(/ /g, '-');
-    }
-    return item;
-  });
+  const cart = (Array.isArray(rawCart) ? rawCart : [])
+    .map((item) => {
+      const price = Number(item.price);
+      const quantity = Number(item.quantity);
+      return {
+        ...item,
+        id: String(item.id || `${item.title || 'item'}-${item.size || 'sin-talle'}`),
+        title: normalizeWhitespace(item.title),
+        size: normalizeWhitespace(item.size),
+        image: normalizeWhitespace(item.image),
+        url: normalizeWhitespace(item.url || 'index.html'),
+        price,
+        quantity
+      };
+    })
+    .filter((item) => item.title && item.size && Number.isFinite(item.price) && item.price > 0 && Number.isInteger(item.quantity) && item.quantity > 0)
+    .map((item) => {
+      if (item.image && item.image.includes('imgremeras/')) {
+        item.image = item.image.replace(/ /g, '-');
+      }
+      return item;
+    });
   const checkout = readJson(CHECKOUT_STORAGE_KEY, {});
   let customer = checkout.customer;
+  if (customer) {
+    customer = {
+      email: normalizeWhitespace(customer.email).toLowerCase(),
+      firstName: normalizeWhitespace(customer.firstName),
+      lastName: normalizeWhitespace(customer.lastName),
+      document: normalizePostalCode(customer.document),
+      address: normalizeWhitespace(customer.address),
+      postalCode: normalizePostalCode(customer.postalCode),
+      city: normalizeWhitespace(customer.city),
+      phone: normalizePostalCode(customer.phone),
+      province: normalizeWhitespace(customer.province || 'Santa Fe'),
+      country: normalizeWhitespace(customer.country || 'Argentina')
+    };
+  }
   const root = document.querySelector('[data-payment-root]');
 
   if (!cart.length || !customer) {
@@ -139,8 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
       console.warn(error);
       return { ok: false, error: error.message || 'No pudimos registrar el pedido.' };
     } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = 'Pagar';
+      if (!document.querySelector('.checkout-success')) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Pagar';
+      }
     }
   };
 
@@ -188,7 +221,25 @@ document.addEventListener('DOMContentLoaded', () => {
       shipping,
       total
     };
-    const message = `Hola FEEL NOTHING, confirmo mi compra.\nPedido: ${order.id}\nTotal: ${formatPrice(total)}\nQuedo atento para coordinar el pago.`;
+    const message = [
+      'Hola FEEL NOTHING, confirmo mi compra.',
+      `Pedido: ${order.id}`,
+      '',
+      'Productos:',
+      ...getOrderLines(),
+      '',
+      `Envio: ${formatPrice(shipping)}`,
+      `Total: ${formatPrice(total)}`,
+      '',
+      'Datos:',
+      `${customer.firstName} ${customer.lastName}`,
+      `DNI: ${customer.document}`,
+      `Direccion: ${customer.address}, ${customer.city}, CP ${customer.postalCode}`,
+      `Telefono: +54 ${customer.phone}`,
+      `Email: ${customer.email}`,
+      '',
+      'Quedo atento para coordinar el pago.'
+    ].join('\n');
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
 
     saveOrderLocally(order);

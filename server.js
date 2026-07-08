@@ -287,9 +287,9 @@ const handleOrder = async (req, res) => {
       source: 'web-checkout'
     };
 
-    const supabaseResult = await insertOrderInSupabase(order);
     await writeOrder(order);
 
+    const supabaseResult = await Promise.allSettled([insertOrderInSupabase(order)]);
     const emailResults = await Promise.allSettled([
       sendEmail({
         to: OWNER_EMAIL,
@@ -307,8 +307,8 @@ const handleOrder = async (req, res) => {
       ok: true,
       orderId: order.id,
       supabase: {
-        ok: true,
-        detail: supabaseResult
+        ok: supabaseResult[0].status === 'fulfilled',
+        detail: supabaseResult[0].status === 'fulfilled' ? supabaseResult[0].value : supabaseResult[0].reason.message
       },
       emails: emailResults.map((result) => ({
         ok: result.status === 'fulfilled',
